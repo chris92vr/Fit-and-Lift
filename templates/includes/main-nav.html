@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="home-link"  aria-haspopup="true" ><i class="fas fa-home"></i>
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'home' %}" id="home-link"  aria-haspopup="true" ><i class="fas fa-home"></i>
                 Home
             </a>
             
@@ -18,9 +18,9 @@
                <i class="fas fa-store"></i> Shop <i class="fas fa-angle-down"></i>
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="shop-link">
-                <a href="{% url 'products' %}?category=clothing" class="dropdown-item">Clothing</a>
-                <a href="{% url 'products' %}?category=nutrition" class="dropdown-item">Nutrition</a>
-                <a href="{% url 'products' %}?category=equipment" class="dropdown-item">Equipment</a>
+                <a href="{% url 'products' %}?category=Clothing" class="dropdown-item">Clothing</a>
+                <a href="{% url 'products' %}?category=Nutrition" class="dropdown-item">Nutrition</a>
+                <a href="{% url 'products' %}?category=Equipment" class="dropdown-item">Equipment</a>
                 <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
             </div>
         </li>
