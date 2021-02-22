@@ -1,0 +1,1 @@
+web: gunicorn Fit_and_Lift.wsgi:application
