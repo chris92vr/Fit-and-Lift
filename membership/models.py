@@ -1,6 +1,6 @@
 from django.db import models
 
-"""List of payment frequency types to be passed into dropdown `frequency` for 
+"""List of payment frequency types to be passed into dropdown `frequency` for
 each frequency type."""
 frequency_types = [
     ('', 'Select Payment Frequency Type'),

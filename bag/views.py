@@ -42,30 +42,7 @@ def add_to_bag(request, item_id):
 
     request.session['bag'] = bag
     return redirect(redirect_url)
-    
-
-def add_membership_to_bag(request, id):
-    """Add membership plan to bag. If user is not logged in, redirect to
-    membership template with error message detailing same. If user is logged
-    in and has already added a plan to bag, and attempts to add another,
-    show error message and redirect to membership template."""
-    plan_qty = 1
-    bag = request.session.get('bag', {})
-
-    if request.user.is_authenticated:
-        if bag.items():
-            messages.error(request, 'You already have added a Plan to your bag.')
-            return redirect('membership')
-
-        bag[id] = bag.get(id, plan_qty)
-
-        request.session['bag'] = bag
-        messages.success(request, 'Membership Plan added to bag!')
-        return redirect(reverse('membership'))
-
-    messages.error(request, 'You must be logged in to add a Plan to bag.')
-    return redirect('membership')
-
+ 
 
 def adjust_bag(request, item_id):
     """Adjust the quantity of the specified product to the specified amount"""
