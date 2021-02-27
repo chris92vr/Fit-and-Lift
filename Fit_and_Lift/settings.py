@@ -21,8 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
-
+#DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = 'TRUE'
 ALLOWED_HOSTS = ['fit-and-lift.herokuapp.com', 'localhost']
 
 
@@ -42,13 +42,16 @@ INSTALLED_APPS = [
     'home',
     'products',
     'bag',
+    'membership',
+
     'checkout',
     'profiles',
-
+   
     # Other
     'crispy_forms',
     'storages',
-    'membership',
+   
+
 ]
 
 MIDDLEWARE = [
@@ -81,6 +84,11 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'bag.contexts.bag_contents',
+                
+               
+                
+
+                
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -200,13 +208,14 @@ if 'USE_AWS' in os.environ:
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = 'usd'
+STRIPE_PRICE_ID = 'price_1IOWGSDMpD1B6egnGmJEknuf'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 DEFAULT_FROM_EMAIL = 'fitandlift@example.com'
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
+    DEFAULT_FROM_EMAIL = 'fitandlift@example.com'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True

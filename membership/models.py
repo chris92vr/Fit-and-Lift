@@ -17,7 +17,7 @@ class Membership(models.Model):
     brief_desc = models.TextField(max_length=200)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     frequency = models.CharField(max_length=29, choices=frequency_types)
+    
 
     def __str__(self):
-        return "#{0} - {1}".format(
-            self.id, self.type)
+        return self.type

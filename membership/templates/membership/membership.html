@@ -18,6 +18,7 @@
 
         <div class="row">
             <div class="col-sm-12 text-center brand-img">
+                IMAGE
                 <img class="img-fluid" src="" alt="PHP Logo">
             </div>
         </div>
@@ -38,6 +39,7 @@
                 </ul>
             </div>
             <div class="col-sm-12 col-md-6 services-img">
+                other image
                 <img class="img-fluid" src="" alt="Barbell Club">
             </div>
         </div>
@@ -59,29 +61,45 @@
             </div>
         </div>
         <div class="row">
-            {% if memberships %}
-                {% for membership in memberships %}
-                    <div class="col-sm-12 col-lg-4">
-                        <div class="card membership-card">
-                           
-                            <div class="card-header">
-                                <h4><i class="fas fa-euro-sign"></i> {{ membership.type }}</h4>
-                            </div>
-                            <div class="card-body membership-detail">
-                                <p class="brief-desc">{{ membership.brief_desc }}</p>
-                                <p class="price-desc">€{{ membership.price }} / {{ membership.frequency }}</p>
-                                <!-- Render helper text dependent on whether cart is empty or already contains
-                                a plan selected by the User. -->
-                                <button href="">Join Now!</button>
+          {% for membership in memberships %}
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                            <div class="card h-100 border-0">
+            
+                                <div class="card-body pb-0">
+                                    <p class="mb-0">{{ membership.type }}</p>
+                                </div>
+                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="lead mb-0 text-left font-weight-bold">${{ membership.price }}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'membership_detail' membership.id %}">fvsv</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="col-sm-12 text-center">
-                    <p class="page-desc">There are no Membership plans available right now. Check back later.</p>
-                </div>
-            {% endif %}
+                        {% if forloop.counter|divisibleby:1 %}
+                            <div class="col-12 d-sm-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}                        
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:4 %}
+                            <div class="col-12 d-none d-xl-block mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                    {% endfor %} 
         </div>
     </div>
 {% endblock %}

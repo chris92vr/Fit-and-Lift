@@ -253,6 +253,16 @@ input[name='q']::placeholder {
     border-radius: 0;
 }
 
+/* -------------------------------- Footer */
+
+.footer, .push {
+	height: 50px; /* .push must be the same height as .footer */
+}
+.footer {
+  background-color: #dddddd;
+  padding: 15px
+  }
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */

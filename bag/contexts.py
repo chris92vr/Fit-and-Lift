@@ -30,6 +30,7 @@ def bag_contents(request):
                     'quantity': quantity,
                     'product': product,
                     'size': size,
+                    
                 })
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
@@ -52,3 +53,5 @@ def bag_contents(request):
     }
 
     return context
+
+

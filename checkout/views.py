@@ -7,6 +7,7 @@ from .forms import OrderForm
 from .models import Order, OrderLineItem
 
 from products.models import Product
+
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 from bag.contexts import bag_contents
@@ -30,6 +31,7 @@ def cache_checkout_data(request):
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
+
 
 
 def checkout(request):
@@ -181,3 +183,5 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+
+    
