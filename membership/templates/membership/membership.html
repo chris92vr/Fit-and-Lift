@@ -5,101 +5,60 @@
 {% block title %} Membership {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
+    <section id="subscription">
+        <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="page-title text-center">Membership</h1>
-            </div>
-            <div class="col-sm-12">
-                <p class="page-desc text-center">description section</p>
+                <h1 class="page-title text-center">Subscription</h1>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-12 text-center brand-img">
-                IMAGE
-                <img class="img-fluid" src="" alt="PHP Logo">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="page-subtitle text-center">Our Services include:</h2>
-            </div>
-            <div class="col-sm-12 col-md-6 my-auto">
-                <ul class="services-list text-center">
-                    <li class="about-list-item">Coached Weightlifting</li>
-                    <li class="about-list-item">Pay As You Go Options</li>
-                    <li class="about-list-item">Online Coaching</li>
-                    <li class="about-list-item">Nutrition Planning</li>
-                    <li class="about-list-item">Personal Training</li>
-                    <li class="about-list-item">Physical Therapy</li>
-                    <li class="about-list-item">Community</li>
-                    <li class="about-list-item">& More</li>
-                </ul>
-            </div>
-            <div class="col-sm-12 col-md-6 services-img">
-                other image
-                <img class="img-fluid" src="" alt="Barbell Club">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
+        <br>
+    
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="page-subtitle text-center">Payment Plans</h2>
             </div>
             <div class="col-sm-12 text-center">
-                <p class="page-desc">Each of the below has been trialed and researched to be the most effective
-                in terms of cost per plan! We offer a range of features that is common amongst each plan, such as introductory
+                <p class="page-desc"> We offer a range of features that is common amongst each plan, such as introductory
                 meetings with the staff & facility, and Foundation classes all rolled into the packages. After that, the plans
                 below will detail what each of them offer.</p>
-                <p class="page-desc">Just click on any of the plans below to add them to your cart, don't worry sales
+                <p class="page-desc">Just click on any of the plans below, don't worry sales
                 aren't final until you checkout! You can only chose one option at a time, chose wisely.</p>
-                <small class="action-helper">Disclaimer: You cannot add a Plan to cart unless logged in.</small>
+               
             </div>
         </div>
-        <div class="row">
-          {% for membership in memberships %}
-                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <div class="card h-100 border-0">
-            
-                                <div class="card-body pb-0">
-                                    <p class="mb-0">{{ membership.type }}</p>
-                                </div>
-                                <div class="card-footer bg-white pt-0 border-0 text-left">
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="lead mb-0 text-left font-weight-bold">${{ membership.price }}</p>
-                                            
-                                        </div>
-                                    </div>
-                                    <a href="{% url 'membership_detail' membership.id %}">fvsv</a>
-                                </div>
+        <br>
+        <br>
+        
+           <!-- Membership card -->
+     
+  
+
+    <div class = "row" >
+                              {% for membership in membership %}
+                        <div class="card col-4" >
+                            <div class="card-body" >
+
+
+                            
+                                <h5 class="card-title text-center">{{ membership }}</h5>
+                                     <a class="btn colored" href="{% url 'checkout_membership' membership.id %}">
+                        <h5 class="text-center">
+                            €{{ membership.price }}.00 JOIN NOW</h5>
+                    </a>
                             </div>
+
+
+
                         </div>
-                        {% if forloop.counter|divisibleby:1 %}
-                            <div class="col-12 d-sm-none mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}                        
-                        {% if forloop.counter|divisibleby:2 %}
-                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}
-                        {% if forloop.counter|divisibleby:3 %}
-                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}
-                        {% if forloop.counter|divisibleby:4 %}
-                            <div class="col-12 d-none d-xl-block mb-5">
-                                <hr>
-                            </div>
-                        {% endif %}
-                    {% endfor %} 
+                    {% endfor %}
+            </div>
         </div>
+
+
     </div>
+       
+</section>
+ 
 {% endblock %}
