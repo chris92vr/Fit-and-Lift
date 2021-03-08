@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="blog"> 
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{{ post.title }}</h1>
+        <p class=" text-muted">{{ post.created_by }} | {{ post.created_on }}</p>
+        <p class="card-text ">{{ post.content }}</p>
+      </div>
+       {% if post.created_by == profile.user  %}
+                        <small class="ml-3">
+                            <a href="{% url 'edit_post' post.id %}">Edit</a> | 
+                            <a class="text-danger" href="{% url 'delete_post' post.id %}">Delete</a>
+                        </small>
+                    {% endif %}
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}
