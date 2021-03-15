@@ -1,27 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
-
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
-{% endblock %}
-
 {% block content %}
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h2 class="home-introduction">
-                    Small group training <br> Friendly Community <br> Professional Guidance
-                </h2>
-                <div class="my-5">
-                    <h4>
-                        <a href="{% url 'membership' %}" class="join-now-button btn btn-lg rounded-0  py-3">Join Now!</a>
-                    </h4>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="home-background">
+   <!-- Home Section -->
+   <section id="home" >
+      <h2 class="home-introduction">
+         Small group training <br> Friendly Community <br> Professional Guidance <br><a class="btn" href="{% url 'membership' %}" class="black">Join Now!</a>
+      </h2>
+   </section>
+   <!-- End Home Section -->
+   <!-- Fun Acts -->
+   <section id="fun-acts" class="container">
+      <div class="inner fun-acts">
+         <div class="about-margin"></div>
+         <a class="about-icon">
+         <i class="fas fa-heartbeat"></i>
+         </a>
+         <br />        
+         <!-- Header -->
+         <h1 class="colored animated fadeInLeft" data-animation-delay="200" >
+            Fit your body,<span class="colored animated fadeInRight" data-animation-delay="400">lift your soul</span>
+         </h1>
+      </div>
+      <!-- End Fun Acts Inner -->
+   </section>
+   <!-- End Fun Acts Section -->
+</div>
+<!-- Blockquote -->
+<section id="blockquote">
+   <div class="inner no-padding">
+      <!-- Your Text -->
+      <p class="normal white blockquote fancy">“Energy & persistence conquer all things.” – Benjamin Franklin </p>
+   </div>
+</section>
+<!-- End Blockquote Section -->
 {% endblock %}

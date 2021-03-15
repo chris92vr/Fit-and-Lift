@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Contact Section -->
+<section id="contact" class="container">
+   <!-- Contact Inner -->
+   <div class="inner">
+      <!-- Form Area -->
+      <div class="contact-form p-5">
+         <div >
+            <h1>Contact</h1>
+            <h4>Contact us directly if you have any questions</h4>
+            <form method="post">
+               {% csrf_token %}
+               {{form.as_p}}
+               <button type="submit">Submit</button>
+            </form>
+         </div>
+      </div>
+      <!-- End Inner -->
+   </div>
+</section>
+<!-- End Contact Section -->
+{% endblock %}
