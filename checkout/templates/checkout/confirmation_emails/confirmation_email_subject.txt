@@ -1,1 +1,1 @@
-Fit and Lift Confirmation for Order Number {{ order.order_number }}
+Fit and Lift Confirmation for your subscription
