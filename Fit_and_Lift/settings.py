@@ -40,18 +40,13 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'home',
-    'products',
-    'bag',
     'membership',
-
     'checkout',
     'profiles',
-   
+    'blog',
     # Other
     'crispy_forms',
     'storages',
-   
-
 ]
 
 MIDDLEWARE = [
@@ -83,12 +78,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'bag.contexts.bag_contents',
-                
-               
-                
-
-                
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -109,8 +98,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
-
-
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
