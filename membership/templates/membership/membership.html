@@ -1,64 +1,43 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
 {% block title %} Membership {% endblock %}
-
 {% block content %}
-    <section id="subscription">
-        <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="page-title text-center">Subscription</h1>
+<section id="subscription">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-sm-12">
+            <h1 class="page-title text-center">Subscription</h1>
+         </div>
+      </div>
+      <br>
+      <div class="row">
+         <div class="col-sm-12">
+            <h2 class="page-subtitle text-center">Payment Plans</h2>
+         </div>
+         <div class="col-sm-12 text-center">
+            <p class="mt-4">Just click on any of the plans below, don't worry sales
+               aren't final until you checkout! You can only chose one option at a time, chose wisely.
+            </p>
+         </div>
+      </div>
+      <br>
+      <br>
+      <!-- Membership card -->
+      <div class = "row container-membership" >
+         {% for membership in membership %}
+         <div class="card col-4" >
+            <div class="card-body" >
+               <h5 class="card-title text-center">{{ membership }}</h5>
+               <a class="text-center colored" href="{% url 'checkout_membership' membership.id %}">
+                  <h5>
+                     €{{ membership.price }}.00 <br class="mb-2"> JOIN NOW
+                  </h5>
+               </a>
             </div>
-        </div>
-
-        <br>
-    
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="page-subtitle text-center">Payment Plans</h2>
-            </div>
-            <div class="col-sm-12 text-center">
-                <p class="page-desc"> We offer a range of features that is common amongst each plan, such as introductory
-                meetings with the staff & facility, and Foundation classes all rolled into the packages. After that, the plans
-                below will detail what each of them offer.</p>
-                <p class="page-desc">Just click on any of the plans below, don't worry sales
-                aren't final until you checkout! You can only chose one option at a time, chose wisely.</p>
-               
-            </div>
-        </div>
-        <br>
-        <br>
-        
-           <!-- Membership card -->
-     
-  
-
-    <div class = "row" >
-                              {% for membership in membership %}
-                        <div class="card col-4" >
-                            <div class="card-body" >
-
-
-                            
-                                <h5 class="card-title text-center">{{ membership }}</h5>
-                                     <a class="btn colored" href="{% url 'checkout_membership' membership.id %}">
-                        <h5 class="text-center">
-                            €{{ membership.price }}.00 JOIN NOW</h5>
-                    </a>
-                            </div>
-
-
-
-                        </div>
-                    {% endfor %}
-            </div>
-        </div>
-
-
-    </div>
-       
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+   </div>
 </section>
- 
 {% endblock %}

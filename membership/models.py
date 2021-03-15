@@ -1,11 +1,6 @@
 from django.db import models
-
 from profiles.models import UserProfile
-from datetime import datetime, timedelta
-
-
-
-# Create your models here.
+from datetime import datetime
 
 
 class Membership(models.Model):
@@ -17,7 +12,6 @@ class Membership(models.Model):
         ('monthly', ('Monthly')),
         ('annually', ('Annually')),
     ]
-    
     name = models.CharField(max_length=20, null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)
     duration_days = models.IntegerField(default="30")
@@ -30,7 +24,6 @@ class Membership(models.Model):
     def __str__(self):
         return self.membership_type
     
-
 
 class UserMembership(models.Model):
     """
