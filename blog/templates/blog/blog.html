@@ -1,35 +1,64 @@
 {% extends "base.html" %}
 {% load static %}
-
-
-
 {% block content %}
 <section class="blog">
-       <div class="blog-container">
-                <div class="row">
-      
-              <!-- Blog Entries Column -->
-              <div class="col-md-8 mt-3 ">
-                  {% if request.user.is_authenticated %}
-                              
-                                    <a href="{% url 'add_post' %}" class="add-post ">Add a Post</a>
-                             
-                            {% endif %}
-                    {% for post in post %}
-                <div class="card mb-4" >
-                  <div class="card-body">
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <p class="card-text text-muted h6">{{ post.created_by }} | {{ post.created_on}} </p>
-
-                    <p class="card-text">{{post.content|slice:":200" }}</p>
-                    <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
-                  </div>
-                 
-                </div>
-                {% endfor %}
+   <div class="blog-container container-fluid">
+      <div class="blog-header text-center mb-3">
+         <h1 class="blog-title">Fit and Lift Blog</h1>
+         <p class="lead blog-description">The official blog</p>
+      </div>
+      <div class="row">
+         <div class="col-sm-8 col blog-main">
+            {% for post in post %}
+            <div class="blog-post card">
+               <h2 class="blog-post-title card-title">{{ post.title }}</h2>
+               <p class="blog-post-meta">{{ post.created_by }} | {{ post.created_on}} </p>
+               {% if post.image %}
+               <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}">
+               {% else %}
+               <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
+               {% endif %}
+               <p class="card-text card-body">{{post.content|slice:":200" }}</p>
+               <a href="{% url 'post_detail' post.id %}" class="btn ">Read More &rarr;</a>
             </div>
+            <!-- /.blog-post -->
+            {% endfor %}
+            <div>
+               {% if post.has_previous %}
+               <a href="?page={{post.previous_page_number}}">Previous</a> {% else %}
+               <span>Previous</span> {% endif %}
+               <span>
+               Page {{post.number}} of {{post.paginator.num_pages}}.
+               </span> {% if post.has_next %}
+               <a href="?page={{post.next_page_number}}">Next</a> {% else %}
+               <span>Next</span> {% endif %}
             </div>
+         </div>
+         <!-- /.row -->
+         <div class="col-sm-3 col col-sm-offset-1 blog-sidebar">
+            {% if request.user.is_authenticated %}
+            <div class="sidebar-module">
+               <h5 class="mb-3">User action</h5>
+               <a href="{% url 'add_post' %}" class="add-post ">Add a Post</a>
             </div>
+            {% endif %}
+            <!-- Search Widget -->
+            <div class="sidebar-module">
+               <h5 >Search on the blog</h5>
+               <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search...">
+                  <span class="input-group-append">
+                  <button class="btn btn-secondary" type="button">Go!</button>
+                  </span>
+               </div>
+            </div>
+            <div class="sidebar-module sidebar-module-inset">
+               <h4>About</h4>
+               <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            </div>
+         </div>
+         <!-- /.blog-sidebar -->
+      </div>
+   </div>
 </section>
-            {% endblock %}
-                
+{% endblock %}

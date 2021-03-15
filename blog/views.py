@@ -1,18 +1,32 @@
-from django.views import generic
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from profiles.models import UserProfile
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def blog(request):
     """ renders all membership"""
 
-    post = Post.objects.all()
+    all_post = Post.objects.all()
+    page_number = request.GET.get('page')
+    paginator = Paginator(all_post, 3) # 10 items per page
+    try:
+        post = paginator.page(page_number)
+        # This can raise an error
+    except PageNotAnInteger:
+        # If the page number is not an integer
+        # show the first page
+        post = paginator.page(1)
+    except EmptyPage:
+        # If the page number is out of range
+        # show the last page
+        post = paginator.page(paginator.num_pages)
     context = {
         'post': post,
+        
 
     }
 
@@ -24,9 +38,26 @@ def post_detail(request, post_id):
     """ Renders the product details """
     profile = UserProfile.objects.get(user=request.user)
     post = get_object_or_404(Post, pk=post_id)
+    comments = post.comments.filter(active=True)
+    new_comment = None
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = post
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
     context = {
         'post': post,
         'profile': profile,
+        'comments': comments,
+        'new_comment': new_comment,
+        'comment_form': comment_form
     }
 
     return render(request, 'blog/post_detail.html', context)
