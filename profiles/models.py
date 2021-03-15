@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from django_countries.fields import CountryField
-
+import datetime
 
 class UserProfile(models.Model):
     """
@@ -12,6 +12,9 @@ class UserProfile(models.Model):
     delivery information and order history
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_subscribed = models.BooleanField(null=True)
+    expire_date_subscription = models.DateField(null=True)
+    date_of_registration = models.DateField(auto_now_add=True)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
     default_street_address1 = models.CharField(max_length=80, null=True, blank=True)
     default_street_address2 = models.CharField(max_length=80, null=True, blank=True)
