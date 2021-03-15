@@ -16,7 +16,7 @@ def contact(request):
         contact_email = form.cleaned_data.get("contact_email")
         content = form.cleaned_data.get("content")
         content = " with the email, " + contact_email + ", sent the following message:\n\n" + content;
-        send_mail(subject, content, settings.DEFAULT_FROM_EMAIL, [contact_email])
+        send_mail(subject, content, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
         context = {'form': form}
         return render(request, 'home/contact_us.html', context)
     else:
