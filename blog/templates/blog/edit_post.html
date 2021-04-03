@@ -1,32 +1,30 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<section class="blog">
-   <div class=" blog-container text-center">
-      <div class="row">
-         <div class="col-12 ">
-            <hr>
-            <h2 class="logo-font mb-4">Blog</h2>
-            <h5 class="text-muted">Edit a Post</h5>
-            <hr>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col-12 ">
-            <form method="POST" action="{% url 'edit_post' post.id %}" class="form mb-2" enctype="multipart/form-data">
-               {% csrf_token %}
-               {% for field in form %}
-               {{ field | as_crispy_field }}
-               {% endfor %}
-               <div class="text-right">
-                  <a class="btn btn-outline-black rounded-0" href="{% url 'blog' %}">Cancel</a>
-                  <button class="btn btn-black rounded-0" type="submit">Update Post</button>
-               </div>
-            </form>
-         </div>
+<div class="blog-container border p-5 container text-center">
+   <div class="row">
+      <div class="col-12 ">
+         <hr>
+         <h2 class="logo-font mb-4">Blog</h2>
+         <h5 class="text-muted">Edit a Post</h5>
+         <hr>
       </div>
    </div>
-</section>
+   <div class="row">
+      <div class="col-12 ">
+         <form method="POST" action="{% url 'edit_post' post.id %}" class="form mb-2" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            {{ field | as_crispy_field }}
+            {% endfor %}
+            <div class="text-right">
+               <a class="btn btn-outline-black rounded-0" href="{% url 'blog' %}">Cancel</a>
+               <button class="btn btn-black rounded-0" type="submit">Update Post</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
@@ -37,3 +35,4 @@
    });
 </script>
 {% endblock %}
+
