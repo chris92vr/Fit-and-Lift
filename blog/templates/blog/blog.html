@@ -7,17 +7,17 @@
       <p class="lead blog-description">The official blog</p>
    </div>
    <div class="row">
-       <!-- Sidebar Small Screen -->
+      <!-- Sidebar Small Screen -->
       <div class="col-sm-12 blog-sidebar d-block d-md-block d-lg-none">
          {% if request.user.is_authenticated %}
          <div class="card text-center w-75 border-0 mb-4">
             <div class="card-body"></div>
             <h5 class="card-title">User action</h5>
             <a href="{% url 'add_post' %}" class="btn mt-5 mb-4">Add a New Post</a> 
-            {% endif %}
          </div>
+         {% endif %}
          <!-- Search Widget -->
-         <div class="sidebar-module">
+         <div class="sidebar-module text-center">
             <form method="GET" action="{% url 'blog' %}">
                <h5 class="mb-3">Search on the blog</h5>
                <div class="input-group">
@@ -70,8 +70,8 @@
             <div class="card-body"></div>
             <h5 class="card-title">User action</h5>
             <a href="{% url 'add_post' %}" class="btn mt-5 mb-4">Add a New Post</a> 
-            {% endif %}
          </div>
+         {% endif %}
          <!-- Search Widget -->
          <div class="sidebar-module">
             <form method="GET" action="{% url 'blog' %}">
