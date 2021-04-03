@@ -8,5 +8,10 @@ urlpatterns = [
     path('membership/payment/<int:membership_id>',
          views.membership_success,
          name='membership_success'),
-
+    path('subscription/<int:subscription_id>/',
+         views.update_subscription_checkout,
+         name='update_subscription_checkout'),
+    path('subscription_success/<int:subscription_id>/',
+         views.update_subscription_checkout_success,
+         name='update_subscription_checkout_success'),
 ]

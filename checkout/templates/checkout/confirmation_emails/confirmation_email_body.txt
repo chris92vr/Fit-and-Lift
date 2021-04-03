@@ -1,4 +1,4 @@
-Hello {{ order.full_name }}!
+Hello {{ profile1.first_name }}!
 
 This is a confirmation of your subscription at Fit and Lift. 
 
