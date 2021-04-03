@@ -5,6 +5,14 @@
       <li class="nav-item "><a href="{% url 'membership' %}" class="scroll">Membership</a></li>
       <li class="nav-item "><a href="{% url 'blog' %}" class="scroll">Blog</a></li>
       <li class="nav-item "><a href="{% url 'contact' %}" class="scroll">Contact</a></li>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item d-lg-none "><a href="{% url 'profile' %}" class="scroll">Profile</a></li>
+      <li class="nav-item  d-lg-none"><a href="{% url 'account_logout' %}" class="scroll">Logout</a></li>
+      {% else %}
+      <li class="nav-item  d-lg-none"><a href="{% url 'account_signup' %}" class="scroll">Register</a></li>
+      <li class="nav-item  d-lg-none"><a href="{% url 'account_login' %}" class="scroll">Login</a></li>
+      {% endif %}
    </ul>
 </div>
 <!-- End Navigation Menu -->
+
