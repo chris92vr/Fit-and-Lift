@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+<!-- Profile body -->
+<div id="subscription-checkout" class="container">
+   <!-- Membership Title -->
+   <div class="col-12 text-center text-uppercase jumbotron">
+      <h1 class=" mb-5">THANK YOU!</h1>
+      <div class="text-capitalize">
+         <p>{{ profile_name }}, thanks for contacting us. Our staff will try to answer you as soon as possible.</p>
+      </div>
+   </div>
+</div>
+{% endblock %}
+

@@ -3,10 +3,8 @@
 {% block content %}
 <div id="home-background">
    <!-- Home Section -->
-   <section id="home" >
-      <h2 class="home-introduction">
-         Small group training <br> Friendly Community <br> Professional Guidance <br><a class="btn" href="{% url 'membership' %}" class="black">Join Now!</a>
-      </h2>
+   <section class=" home" >
+      <a class="btn home-introduction " href="{% url 'membership' %}">Join Now!</a>
    </section>
    <!-- End Home Section -->
    <!-- Fun Acts -->
@@ -16,16 +14,55 @@
          <a class="about-icon">
          <i class="fas fa-heartbeat"></i>
          </a>
-         <br />        
+         <br>        
          <!-- Header -->
          <h1 class="colored animated fadeInLeft" data-animation-delay="200" >
             Fit your body,<span class="colored animated fadeInRight" data-animation-delay="400">lift your soul</span>
          </h1>
       </div>
-      <!-- End Fun Acts Inner -->
    </section>
-   <!-- End Fun Acts Section -->
 </div>
+<!-- Gallery -->
+<section class="gallery-container">
+   <div class="row">
+      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+         <img
+            src="media/gallery1.jpg"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt=""
+            />
+         <img
+            src="media/gallery2.jpg"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt=""
+            />
+      </div>
+      <div class="col-lg-4 mb-4 mb-lg-0">
+         <img
+            src="media/gallery3.jpg"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt=""
+            />
+         <img
+            src="media/gallery4.jpg"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt=""
+            />
+      </div>
+      <div class="col-lg-4 mb-4 mb-lg-0">
+         <img
+            src="media/gallery5.jpg"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt=""
+            />
+         <img
+            src="media/gallery6.jpg"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt=""
+            />
+      </div>
+   </div>
+</section>
 <!-- Blockquote -->
 <section id="blockquote">
    <div class="inner no-padding">
@@ -33,5 +70,5 @@
       <p class="normal white blockquote fancy">“Energy & persistence conquer all things.” – Benjamin Franklin </p>
    </div>
 </section>
-<!-- End Blockquote Section -->
 {% endblock %}
+
