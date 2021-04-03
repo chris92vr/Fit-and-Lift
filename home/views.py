@@ -3,13 +3,14 @@ from .forms import ContactForm
 from django.conf import settings
 from django.core.mail import send_mail
 from profiles.models import UserProfile
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     """ A view to return the index page """
     return render(request, 'home/index.html')
 
-
+@login_required
 def contact(request):
     """ Renders a contact form """
     form = ContactForm(request.POST or None)
