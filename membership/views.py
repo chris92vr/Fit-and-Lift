@@ -1,35 +1,43 @@
 from django.shortcuts import render, get_object_or_404
+from membership.models import Membership, UserMembership, Subscription
+from profiles.models import UserProfile
 from django.contrib.auth.decorators import login_required
-from django.utils.dateparse import parse_date
-from datetime import timedelta
-from membership.models import Membership, Subscription
+import datetime as dt
 
 
 def membership(request):
     """ renders all membership"""
     membership = Membership.objects.all()
+    date = dt.date.today()
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+        usermembership = get_object_or_404(UserMembership,
+                                           member_profile=profile)
+        subscription = get_object_or_404(Subscription,
+                                         subcription_membership=usermembership
+                                         )
+    except:
+        usermembership = None
+        subscription = None
+        profile = None
     context = {
         'membership': membership,
+        'subscription': subscription,
+        'date': date,
     }
     return render(request, 'membership/membership.html', context)
 
 
 @login_required
-def membership_detail(request, membership_id):
-    """ Renders the membership details """
-    membership = get_object_or_404(Membership, pk=membership_id)
-    subscription = Subscription.objects.all()
-    date = None
-    exp_date = 0
-    if request.method == 'POST':
-        date_str = request.POST.get('date')
-        date = parse_date(date_str)
-        exp_date = date + timedelta(days=membership.duration_days)
-    exp_date = exp_date
+def edit_subscription(request, subscription_id):
+    """ Extends subscription """
+    extended_days = 0
+    subscription = get_object_or_404(Subscription, pk=subscription_id)
+    if request.method == 'GET':
+        extended_days = request.GET.get('extended_subscription_days')
+        request.session['extended'] = extended_days
+    template = 'membership/edit_subscription.html'
     context = {
-        'membership': membership,
         'subscription': subscription,
-        'date': date,
-        'exp_date': exp_date,
     }
-    return render(request, 'membership/membership_detail.html', context)
+    return render(request, template, context)

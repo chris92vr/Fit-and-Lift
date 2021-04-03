@@ -2,16 +2,22 @@
 {% load static %}
 {% block title %} Membership {% endblock %}
 {% block content %}
-<section id="subscription">
+<section class="subscription">
    <div class="container-fluid">
       <div class="row">
          <div class="col-sm-12">
-            <h1 class="page-title text-center">Subscription</h1>
+            <h1 class="text-center">Subscription</h1>
          </div>
       </div>
       <br>
-      <div class="row">
+      <div class="row container m-auto">
          <div class="col-sm-12">
+            {% if subscription.expire_date_subscription > date %}
+            <div class="jumbotron text-center">
+               <p> You cannot proceed with payment as you are already subscribed until {{ subscription.expire_date_subscription }} </p>
+               <a class="mt-3 btn" href="{% url 'edit_subscription' subscription.id %}">Extend Subscription</a>
+            </div>
+            {% else %}
             <h2 class="page-subtitle text-center">Payment Plans</h2>
          </div>
          <div class="col-sm-12 text-center">
@@ -25,7 +31,7 @@
       <!-- Membership card -->
       <div class = "row container-membership" >
          {% for membership in membership %}
-         <div class="card col-4" >
+         <div class="card col-md-4 col-sm-12" >
             <div class="card-body" >
                <h5 class="card-title text-center">{{ membership }}</h5>
                <a class="text-center colored" href="{% url 'checkout_membership' membership.id %}">
@@ -38,6 +44,7 @@
          {% endfor %}
       </div>
    </div>
-   </div>
+   {% endif %}
 </section>
 {% endblock %}
+

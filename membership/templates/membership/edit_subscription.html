@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="subscription">
+   <div class="text-center">
+      <div class="row">
+         <div class="col-12 mb-4">
+            <h1 >Extend Subscription</h1>
+         </div>
+      </div>
+      <div class="row container m-auto">
+         <div class="col-12 jumbotron text-center">
+            <form method="GET" action="{% url 'update_subscription_checkout' subscription.id %}" class="form mt-3 mb-2" enctype="multipart/form-data">
+               {% csrf_token %}
+               <label for="extended_subscription_days">Choose the plane for extend your subscription:</label>
+               <select id="extended_subscription_days" name="extended_subscription_days">
+                  <option value="7">7 days (15 euro)</option>
+                  <option value="30">30 days (50 euro)</option>
+                  <option value="365">365 days (500 euro)</option>
+               </select>
+               <div class="text-center mt-3">
+                  <a class="btn btn-outline-black " href="{% url 'membership' %}">Cancel</a>
+                  <button class="btn btn-black " id="payment" type="submit">Proceed with payment!</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}
+

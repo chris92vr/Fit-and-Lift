@@ -13,7 +13,6 @@ class Membership(models.Model):
         ('annually', ('Annually')),
     ]
     name = models.CharField(max_length=20, null=True, blank=True)
-    slug = models.SlugField(null=True, blank=True)
     duration_days = models.IntegerField(default="30")
     membership_type = models.CharField(
         choices=frequency, default='monthly',
@@ -22,8 +21,8 @@ class Membership(models.Model):
     price = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.membership_type
-    
+        return self.name
+
 
 class UserMembership(models.Model):
     """
@@ -33,10 +32,16 @@ class UserMembership(models.Model):
                                        null=True, blank=False,
                                        related_name='member')
     user_membership = models.ForeignKey(
-        Membership, related_name='user_membership', on_delete=models.SET_NULL, null=True)
+        Membership,
+        related_name='user_membership',
+        on_delete=models.SET_NULL,
+        null=True)
+
     @classmethod
     def create(cls, member_profile, user_membership):
-        usermembership = cls(member_profile=member_profile, user_membership=user_membership)
+        usermembership = cls(
+            member_profile=member_profile,
+            user_membership=user_membership)
         # do something with the book
         return usermembership
 
@@ -45,18 +50,26 @@ class Subscription(models.Model):
     """
     Model for Subsciption
     """
+
     subcription_membership = models.ForeignKey(
-        UserMembership, related_name='subscription', on_delete=models.CASCADE, null=True)
+        UserMembership,
+        related_name='subscription',
+        on_delete=models.CASCADE,
+        null=True)
     membership_duration = models.ForeignKey(
-        Membership, related_name='duration', on_delete=models.CASCADE, default="")
+        Membership,
+        related_name='duration',
+        on_delete=models.CASCADE,
+        default="")
+    is_subscribed = models.BooleanField(null=True)
+    expire_date_subscription = models.DateField(null=True)
     purchase_date = models.DateField(default=datetime.today)
+    duration_days = models.IntegerField(default=30)
+    extended_subscription_days = models.IntegerField(null=True)
+    price_for_day = models.FloatField(null=True)
+    total_renewal_price = models.FloatField(null=True)
+
     @property
     def expected_return(self, IntegerField):
-       
+
         return self.purchase_date + datetime.timedelta(days=IntegerField)
-
-   
-     
-
-
-    
