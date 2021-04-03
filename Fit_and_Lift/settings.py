@@ -21,8 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
-# DEBUG = 'TRUE'
+#  DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = 'TRUE'
 ALLOWED_HOSTS = ['fit-and-lift.herokuapp.com', 'localhost']
 
 
@@ -109,7 +109,7 @@ LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'Fit_and_Lift.wsgi.application'
 
-
+ACCOUNT_FORMS = {'signup': 'profiles.forms.MyCustomSignupForm', }
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -125,23 +125,28 @@ else:
         }
     }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        '''django.contrib.auth.password_validation.
+        UserAttributeSimilarityValidator''',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        '''django.contrib.auth.password_validation.
+        MinimumLengthValidator''',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        '''django.contrib.auth.password_validation.
+        CommonPasswordValidator''',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -170,7 +175,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if 'USE_AWS' in os.environ:
-       # Cache control
+    # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
         'CacheControl': 'max-age=94608000',
