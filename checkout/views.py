@@ -88,7 +88,7 @@ def membership_success(request, membership_id):
         'checkout/confirmation_emails/confirmation_email_subject.txt')
     body = render_to_string(
         'checkout/confirmation_emails/confirmation_email_body.txt',
-        {'contact_email': settings.DEFAULT_FROM_EMAIL})
+        {'profile1': profile1, 'contact_email': settings.DEFAULT_FROM_EMAIL})
 
     send_mail(
         subject,
