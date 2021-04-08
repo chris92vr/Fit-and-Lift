@@ -13,10 +13,12 @@ const style = {
     base: {
         color: '#000',
         fontSmoothing: 'antialiased',
+        fontFamily: "'RocknRoll One', sans-serif",
         fontSize: '16px',
         '::placeholder': {
             color: '#aab7c4'
         }
+        
     },
     invalid: {
         color: '#dc3545',

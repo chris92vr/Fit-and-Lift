@@ -1,4 +1,4 @@
-
+/* ---------- nav */
 
 #navigation {
 	position: fixed;
@@ -190,6 +190,15 @@ ul {
 	margin: 11em auto;
 	display: flex;
 	padding: 2rem;
+}
+@media (max-width: 760px) {
+.main-content {
+	width: 100%;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
+	margin: 11em auto;
+	display: flex;
+	padding: 2rem;
+}
 }
 
 .card {
@@ -397,14 +406,19 @@ section.home a {
 	margin-top: 12rem;
 	margin-bottom: 10rem;
 }
-
+.container-payment {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0rem;
+}
+@media (min-width: 400px) {
 .container-payment {
 	max-width: 40rem;
 	margin: 0 auto;
 	border: 1px solid black;
 	padding: 2rem;
 }
-
+}
 #payment-form fieldset {
 	border: 1px solid black;
 	padding: 2rem;
@@ -418,6 +432,8 @@ section.home a {
 	width: 60%;
 	margin: 0 auto;
 }
+
+
 
 
 /** Spinner */
@@ -682,6 +698,12 @@ section.home a {
 	width: 750px;
 	margin-top: 6rem;
 }
+@media (max-width: 578px) {
+	#contact {
+	width: 75%;
+}
+}
+
 
 .contact-text {
 	margin: 45px auto;
