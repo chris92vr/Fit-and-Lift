@@ -179,14 +179,12 @@ def update_subscription_checkout_success(request, subscription_id):
     profile_name = profile.user
     profile1 = get_object_or_404(User, username=request.user)
 
-    # Sends confirmation email to the customer
+   # Sends confirmation email to the customer
     cust_email = profile1.email
     subject = render_to_string(
-        '''checkout/confirmation_emails/
-        confirmation_email_subscription_subject.txt''')
+        'checkout/confirmation_emails/confirmation_email_subscription_subject.txt')
     body = render_to_string(
-        '''checkout/confirmation_emails/
-        confirmation_email_subscription_subject.txt''',
+        'checkout/confirmation_emails/confirmation_email_subscription_body.txt',
         {'contact_email': settings.DEFAULT_FROM_EMAIL})
 
     send_mail(
