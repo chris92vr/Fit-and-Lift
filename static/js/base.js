@@ -4,6 +4,7 @@ $("a.about-icon").hover(function() {
     $(this).children("i").removeClass("fa-spin");
 });
 $('.toast').toast('show');
+$('.toast').toast({delay:1000, animation:false});
 //Get the button:
 mybutton = document.getElementById("myBtn");
 
