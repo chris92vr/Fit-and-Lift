@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django.http.response import JsonResponse, HttpResponse
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
@@ -12,6 +14,7 @@ import datetime as dt
 from membership.models import Membership, UserMembership, Subscription
 from profiles.models import UserProfile
 import stripe
+
 
 
 @login_required
@@ -202,3 +205,29 @@ def update_subscription_checkout_success(request, subscription_id):
         'profile_name': profile_name,
         }
     return render(request, template, context)
+
+@csrf_exempt
+def stripe_webhook(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_WH_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        print("Payment was successful.")
+        # TODO: run some custom code here
+
+    return HttpResponse(status=200)

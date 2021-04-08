@@ -14,4 +14,5 @@ urlpatterns = [
     path('subscription_success/<int:subscription_id>/',
          views.update_subscription_checkout_success,
          name='update_subscription_checkout_success'),
+    path('webhook/', views.stripe_webhook),
 ]
