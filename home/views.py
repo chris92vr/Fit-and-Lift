@@ -3,6 +3,7 @@ from .forms import ContactForm
 from django.conf import settings
 from django.core.mail import send_mail
 from profiles.models import UserProfile
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,9 +16,10 @@ def contact(request):
     """ Renders a contact form """
     form = ContactForm(request.POST or None)
     profile = get_object_or_404(UserProfile, user=request.user)
+    profileUser = get_object_or_404(User, username=request.user)
     if form.is_valid():
         subject = form.cleaned_data.get("subject")
-        contact_email = form.cleaned_data.get("contact_email")
+        contact_email = profileUser.email
         content = form.cleaned_data.get("content")
         content = " with the email, " + contact_email + \
             ", sent the following message:\n\n" + content
