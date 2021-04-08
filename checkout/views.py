@@ -185,7 +185,7 @@ def update_subscription_checkout_success(request, subscription_id):
         'checkout/confirmation_emails/confirmation_email_subscription_subject.txt')
     body = render_to_string(
         'checkout/confirmation_emails/confirmation_email_subscription_body.txt',
-        {'contact_email': settings.DEFAULT_FROM_EMAIL})
+        {'profile1': profile1, 'exp_date': exp_date, 'contact_email': settings.DEFAULT_FROM_EMAIL})
 
     send_mail(
         subject,
