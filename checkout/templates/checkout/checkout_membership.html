@@ -4,20 +4,32 @@
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
 {% block content %}
-<section id="subscription-checkout" class="container-fluid">
+<section  class="subscription">
+    {% if subscription.expire_date_subscription > date %}
+    <div class="container-fluid">
+      <div class="row">
+         <div class="col-sm-12">
+            <h1 class="text-center">Subscription</h1>
+         </div>
+      </div>
+      <br>
+      <div class="row container m-auto">
+         <div class="col-sm-12">
+         <div class="jumbotron text-center container col-12">
+            <p> You cannot proceed with payment as you are already subscribed until {{ subscription.expire_date_subscription }} </p>
+            <a class="mt-3 btn" href="{% url 'edit_subscription' subscription.id %}">Extend Subscription</a>
+         </div>
+         </div>
+      </div>
+    </div>
+         {% else %}
    <div class="row">
       <div class="col-12 text-center">
          <div class="my-5 ">
             <h2>SUBSCRIPTION CHECKOUT</h2>
          </div>
       </div>
-      <div class="col-12">
-         {% if subscription.expire_date_subscription > date %}
-         <div class="jumbotron text-center">
-            <p> You cannot proceed with payment as you are already subscribed until {{ subscription.expire_date_subscription }} </p>
-            <a class="mt-3 btn" href="{% url 'edit_subscription' subscription.id %}">Extend Subscription</a>
-         </div>
-         {% else %}
+         
          <div class="mb-5 mt-md-5 text-center">
             <p class="font-weight-bold mb-0 text-capitalize">{{ membership.membership_type }} Subscription</p>
             <p class="mt-3">{{ membership.duration_days }} days of gym membership</p>
@@ -28,7 +40,6 @@
             <span class="font-weight-bold">Other Membership</span>
             </a>
          </div>
-      </div>
       <div class="col-12 container-payment">
          <form action="{% url 'checkout_membership' membership.id %}"   data-animation-delay="50" method="POST" id="payment-form">
             {% csrf_token %}
