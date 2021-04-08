@@ -13,4 +13,5 @@ urlpatterns = [
     path('profile/', include('profiles.urls')),
     path('blog/', include('blog.urls')),
     path('static/<path:path>/', serve, {'document_root': settings.STATIC_ROOT, }),
+    path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT, }),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
