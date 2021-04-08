@@ -1,6 +1,6 @@
 <li class="list-inline-item dropdown">
    <a href="{% url 'home' %}" class="nav-link main-logo-link">
-      <img class="img-logo" src="../static/images/fit & Lift.png">
+   {% load static %}
+   <img class="img-logo" src="{% static 'images/fit & Lift.png' %}" alt="Fit and Lift Logo">
    </a>
 </li>
-
