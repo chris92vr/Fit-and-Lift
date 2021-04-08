@@ -13,6 +13,7 @@ const style = {
     base: {
         color: '#000',
         fontSmoothing: 'antialiased',
+        fontFamily: "'RocknRoll One', sans-serif",
         fontSize: '16px',
         '::placeholder': {
             color: '#aab7c4'
@@ -25,6 +26,13 @@ const style = {
 };
 const card = elements.create('card', {
     style: style
+});
+window.addEventListener('resize', function(event) {
+  if (window.innerWidth <= 620) {
+    card.update({style: {base: {fontSize: '13px'}}});
+  } else {
+    card.update({style: {base: {fontSize: '16px'}}});
+  }
 });
 card.mount('#card-element');
 

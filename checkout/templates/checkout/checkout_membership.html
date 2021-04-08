@@ -69,5 +69,16 @@
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'checkout/js/stripe.js' %}"></script>
+<script>
+window.addEventListener('resize', function(event) {
+  if (window.innerWidth <= 520 && window.innerWidth >= 420) {
+    card.update({style: {base: {fontSize: '13px'}}});
+  } else if (window.innerWidth < 420) {
+    card.update({style: {base: {fontSize: '11px'}}});
+  } else {
+    card.update({style: {base: {fontSize: '16px'}}});
+  }
+});
+</script>
 {% endblock %}
 
