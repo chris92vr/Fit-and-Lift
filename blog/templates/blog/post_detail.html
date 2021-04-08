@@ -11,7 +11,7 @@
       <div class="row">
         <!-- Sidebar Small screen -->
          <div class="col-sm-12 d-block d-md-block d-lg-none blog-sidebar">
-            {% if request.user.is_authenticated %}
+            {% if user.is_superuser %}
             <div class="card text-center w-75 border-0 mb-4">
                <div class="card-body"></div>
                <h5 class="card-title">User action</h5>
@@ -54,7 +54,7 @@
             <img class="card-img-top img-fluid mb-4" src="{{ MEDIA_URL }}noimage.png" alt="{{ post.title }}">
             {% endif %}
             <!-- Post Content -->
-            <p class="lead">{{ post.content }}</p>
+            <p class="lead">{{ post.content|linebreaks }}</p>
             <hr>
             <!-- Comments Form -->
             <div class="card my-4 p-3">
@@ -86,7 +86,7 @@
          </div>
          <!-- Sidebar Large screen -->
          <div class="col-sm-3 col col-sm-offset-1 blog-sidebar d-none d-lg-block d-sm-none">
-            {% if request.user.is_authenticated %}
+            {% if user.is_superuser %}
             <div class="card text-center w-100 border-0">
                <div class="card-body"></div>
                <h5 class="card-title">User action</h5>

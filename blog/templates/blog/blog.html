@@ -9,7 +9,7 @@
    <div class="row">
       <!-- Sidebar Small Screen -->
       <div class="col-sm-12 blog-sidebar d-block d-md-block d-lg-none">
-         {% if request.user.is_authenticated %}
+         {% if user.is_superuser %}
          <div class="card text-center w-75 border-0 mb-4">
             <div class="card-body"></div>
             <h5 class="card-title">User action</h5>
@@ -65,7 +65,7 @@
       </div>
       <!-- Sidebar Large Screen -->
       <div class="col-sm-3 col col-sm-offset-1 blog-sidebar d-none d-lg-block d-sm-none">
-         {% if request.user.is_authenticated %}
+         {% if user.is_superuser %}
          <div class="card text-center w-75 border-0">
             <div class="card-body"></div>
             <h5 class="card-title">User action</h5>
