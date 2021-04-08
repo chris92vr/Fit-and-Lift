@@ -2,7 +2,7 @@ Hello {{ profile1.first_name }}!
 
 This is a confirmation of the renewal of your membership at Fit and Lift. 
 
-Your Subscription is valid until {{ subscription.expire_date_subscription }}
+Your Subscription is valid until {{ exp_date }}
 
 Thank you for join us!
 
