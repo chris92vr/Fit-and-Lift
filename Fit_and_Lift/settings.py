@@ -11,7 +11,6 @@ import os
 import dj_database_url
 import mimetypes
 
-mimetypes.add_type("text/css", ".css", True)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = 'TRUE'
+DEBUG = 'DEVELOPMENT' in os.environ
+# DEBUG = 'TRUE'
 ALLOWED_HOSTS = ['fit-and-lift.herokuapp.com', 'localhost']
 
 
