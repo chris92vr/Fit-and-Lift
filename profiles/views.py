@@ -20,8 +20,6 @@ def profile(request):
         usermembership = None
         subscription = None
         profile = None
-    date = subscription.purchase_date
-    exp = subscription.expire_date_subscription
     template = 'profiles/profile.html'
     context = {
         'profile': profile,
