@@ -4,7 +4,6 @@
     CSS from here: 
     https://stripe.com/docs/stripe-js
 */
-
 const stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 let clientSecret = $('#id_client_secret').text().slice(1, -1);
 const stripe = Stripe(stripePublicKey);
@@ -26,13 +25,6 @@ const style = {
 };
 const card = elements.create('card', {
     style: style
-});
-window.addEventListener('resize', function(event) {
-  if (window.innerWidth <= 620) {
-    card.update({style: {base: {fontSize: '13px'}}});
-  } else {
-    card.update({style: {base: {fontSize: '16px'}}});
-  }
 });
 card.mount('#card-element');
 
@@ -71,7 +63,8 @@ form.addEventListener('submit', (ev) => {
         }
     }).then((result) => {
         if (result.error) {
-            let errorDiv = document.getElementById('card-errors');
+            let errorDiv = document.getElementById(
+                'card-errors');
             let html = `
                     <span class="icon" role="alert">
                     <i class="fas fa-times"></i>

@@ -4,42 +4,40 @@
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
 {% block content %}
-<section  class="subscription">
-    {% if subscription.expire_date_subscription > date %}
-    <div class="container-fluid">
-      <div class="row">
-         <div class="col-sm-12">
-            <h1 class="text-center">Subscription</h1>
-         </div>
+<section  class="subscription container-fluid">
+   {% if subscription.expire_date_subscription > date %}
+   <div class="row">
+      <div class="col-sm-12">
+         <h1 class="text-center">Subscription</h1>
       </div>
-      <br>
-      <div class="row container m-auto">
-         <div class="col-sm-12">
+   </div>
+   <br>
+   <div class="row container m-auto">
+      <div class="col-sm-12">
          <div class="jumbotron text-center container col-12">
             <p> You cannot proceed with payment as you are already subscribed until {{ subscription.expire_date_subscription }} </p>
             <a class="mt-3 btn" href="{% url 'edit_subscription' subscription.id %}">Extend Subscription</a>
          </div>
-         </div>
       </div>
-    </div>
-         {% else %}
-   <div class="row">
-      <div class="col-12 text-center">
-         <div class="my-5 ">
-            <h2>SUBSCRIPTION CHECKOUT</h2>
-         </div>
+   </div>
+   {% else %}
+   <div class="row container m-auto">
+      <div class="col-12 text-center ">
+         <h2>SUBSCRIPTION CHECKOUT</h2>
       </div>
-         
-         <div class="mb-5 mt-md-5 text-center">
-            <p class="font-weight-bold mb-0 text-capitalize">{{ membership.membership_type }} Subscription</p>
-            <p class="mt-3">{{ membership.duration_days }} days of gym membership</p>
-            <a href="{% url 'membership' %}" class="d-inline btn ">
+      <div class="col-12 ">
+         <div class=" text-center jumbotron mb-5 mt-md-5">
+            <p class="text-capitalize mb-0 font-weight-bold">{{ membership.membership_type }} Subscription</p>
+            <p  class="mt-3">{{ membership.duration_days }} days of gym membership</p>
+            <p class="mt-3">Price: {{ membership.price }}.00 euro </p>
+            <a href="{% url 'membership' %}" class=" btn ">
             <span class="icon">
             <i class="fas fa-caret-left fa-lg"></i>
             </span>
-            <span class="font-weight-bold">Other Membership</span>
+            <span class=" font-weight-bold">Other Membership</span>
             </a>
          </div>
+      </div>
       <div class="col-12 container-payment">
          <form action="{% url 'checkout_membership' membership.id %}"   data-animation-delay="50" method="POST" id="payment-form">
             {% csrf_token %}
@@ -63,15 +61,19 @@
                   <span class="icon">
                   <i class="fas fa-exclamation-circle"></i>
                   </span>
-                  <span>Your card will be charged in <strong>€{{ price }}.00</strong></span>
+                  <span>Your card will be charged in <strong>€{{ membership.price }}.00</strong></span>
                </p>
             </div>
          </form>
       </div>
-   </div>
-   {% endif %}
-   <div id="loading-overlay" class="lds-heart">
-      <div></div>
+      {% endif %}
+      <div id="loading-overlay" class="lds-heart">
+        <h1 class="text-light logo-font loading-spinner">
+            <span class="icon">
+                <i class="fas fa-3x fa-heartbeat fa-spin"></i>
+            </span>
+        </h1>
+      </div>
    </div>
 </section>
 {% endblock %}
@@ -81,15 +83,14 @@
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'checkout/js/stripe.js' %}"></script>
 <script>
-window.addEventListener('resize', function(event) {
-  if (window.innerWidth <= 520 && window.innerWidth >= 420) {
-    card.update({style: {base: {fontSize: '13px'}}});
-  } else if (window.innerWidth < 420) {
-    card.update({style: {base: {fontSize: '11px'}}});
-  } else {
-    card.update({style: {base: {fontSize: '16px'}}});
-  }
-});
+   window.addEventListener('resize', function(event) {
+     if (window.innerWidth <= 520 && window.innerWidth >= 420) {
+       card.update({style: {base: {fontSize: '13px'}}});
+     } else if (window.innerWidth < 420) {
+       card.update({style: {base: {fontSize: '11px'}}});
+     } else {
+       card.update({style: {base: {fontSize: '16px'}}});
+     }
+   });
 </script>
 {% endblock %}
-
