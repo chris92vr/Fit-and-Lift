@@ -1,8 +1,4 @@
 {% extends "base.html" %}
-{% load static %}
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
-{% endblock %}
 {% block content %}
 <div class="profile-container container">
    <div class="card text-center">
@@ -30,7 +26,7 @@
                {{ subscription.expire_date_subscription }}
             </p>
             {% else %}
-            <p class="mt-3"><strong class="text-uppercase">Gym Subscription:</strong> <strong class="text-uppercase">GET MEMBERSHIP NOW!</strong>
+            <p class="mt-3"><strong class="text-uppercase">Gym Subscription:</strong> <strong class="text-uppercase"><a href="{% url 'membership' %}"> GET MEMBERSHIP NOW! </a></strong>
             </p>
             <p class="mt-3"><strong class="text-uppercase">Membership Start</strong> <i class="fas fa-calendar-check text-success"></i> :
                <strong>NOT ACTIVE</strong>
@@ -44,4 +40,3 @@
    </div>
 </div>
 {% endblock %}
-
