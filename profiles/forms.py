@@ -31,10 +31,8 @@ class UserProfileForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'phone_number': 'Phone Number',
             'first_name': 'First Name',
             'last_name': 'Last Name',
 
         }
 
-        self.fields['phone_number'].widget.attrs['autofocus'] = True
