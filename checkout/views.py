@@ -77,8 +77,7 @@ def membership_success(request, membership_id):
     duration_days = membership.duration_days
     date = dt.date.today()
     exp_date = date + timedelta(days=membership.duration_days)
-    Subscription.objects.create(subcription_membership=usermembership,
-                                membership_duration=membership,
+    Subscription.objects.create(subscription_membership=usermembership,
                                 is_subscribed=True,
                                 expire_date_subscription=exp_date,
                                 duration_days=duration_days)
