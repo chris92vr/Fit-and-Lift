@@ -131,7 +131,7 @@ else:
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
-AUTH_PWD_MODULE="django.contrib.auth.password_validation."
+AUTH_PWD_MODULE = "django.contrib.auth.password_validation."
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -195,7 +195,7 @@ if 'USE_AWS' in os.environ:
     # Override static and media URLs in production
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
- 
+
 STRIPE_CURRENCY = 'eur'
 STRIPE_PRICE_ID = 'price_1IOWGSDMpD1B6egnGmJEknuf'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')

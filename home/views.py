@@ -11,6 +11,7 @@ def index(request):
     """ A view to return the index page """
     return render(request, 'home/index.html')
 
+
 @login_required
 def contact(request):
     """ Renders a contact form """

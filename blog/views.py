@@ -147,4 +147,3 @@ def delete_post(request, post_id):
     post.delete()
     messages.success(request, 'Post deleted!')
     return redirect(reverse('blog'))
-

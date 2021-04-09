@@ -35,4 +35,3 @@ class UserProfileForm(forms.ModelForm):
             'last_name': 'Last Name',
 
         }
-

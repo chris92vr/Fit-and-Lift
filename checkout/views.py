@@ -16,7 +16,6 @@ from profiles.models import UserProfile
 import stripe
 
 
-
 @login_required
 def checkout_membership(request, membership_id):
     """
@@ -37,11 +36,11 @@ def checkout_membership(request, membership_id):
         subscription = get_object_or_404(Subscription,
                                          subcription_membership=usermembership
                                          )
-    except:
+    except BaseException:
         usermembership = None
         subscription = None
         profile = None
-    
+
     if request.method == 'POST':
         pid = request.POST.get('client_secret').split('_secret')[0]
         membership.stripe_pid = pid
@@ -156,7 +155,7 @@ def update_subscription_checkout(request, subscription_id):
         'stripe_total': stripe_total,
         'expire_date': expire_date,
         'price': price,
-        }
+    }
     return render(request, template, context,)
 
 
@@ -178,13 +177,14 @@ def update_subscription_checkout_success(request, subscription_id):
     profile_name = profile.user
     profile1 = get_object_or_404(User, username=request.user)
 
-   # Sends confirmation email to the customer
+    # Sends confirmation email to the customer
     cust_email = profile1.email
-    subject = render_to_string(
-        'checkout/confirmation_emails/confirmation_email_subscription_subject.txt')
-    body = render_to_string(
-        'checkout/confirmation_emails/confirmation_email_subscription_body.txt',
-        {'profile1': profile1, 'exp_date': exp_date, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+    subject = render_to_string('''checkout/confirmation_emails/
+        confirmation_email_subscription_subject.txt''')
+    body = render_to_string('''checkout/confirmation_emails/
+        confirmation_email_subscription_body.txt''',
+                            {'profile1': profile1, 'exp_date': exp_date,
+                             'contact_email': settings.DEFAULT_FROM_EMAIL})
 
     send_mail(
         subject,
@@ -200,8 +200,9 @@ def update_subscription_checkout_success(request, subscription_id):
         'exp_date': exp_date,
         'subscription': subscription,
         'profile_name': profile_name,
-        }
+    }
     return render(request, template, context)
+
 
 @csrf_exempt
 def stripe_webhook(request):
