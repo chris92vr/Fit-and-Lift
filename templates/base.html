@@ -1,3 +1,5 @@
+
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -28,10 +30,7 @@
       {% endblock %}
       {% block extra_js %}
       {% endblock %}
-      
-     
-    <title>Fit & Lift | {% block extra_title %}{% endblock %}</title>
-  
+      <title>Fit & Lift | {% block extra_title %}{% endblock %}</title>
    </head>
    <body>
       <header class="darknav  fixed-top">
@@ -80,41 +79,7 @@
       {% endblock %}
       <!-- Scroll to top button -->
       <button onclick="topFunction()" id="myBtn" title="Go to top">☝️ <br> Top</button> 
-      <!-- Site Socials and Address -->
-      <section id="site-socials" class="no-padding white-bg">
-         <div class="site-socials inner no-padding">
-            <!-- Socials -->
-            <div class="socials animated" data-animation="fadeInLeft" data-animation-delay="400">
-               <!-- Facebook -->
-               <a href="#" target="_blank" class="social">
-               <i class="fa fa-facebook"></i>
-               </a>
-               <!-- Twitter -->
-               <a href="#" target="_blank" class="social">
-               <i class="fa fa-twitter"></i>
-               </a>
-               <!-- Instagram -->
-               <a href="#" class="social">
-               <i class="fa fa-instagram"></i>
-               </a>
-               <!-- Youtube -->
-               <a href="#" target="_blank" class="social">
-               <i class="fa fa-youtube"></i>
-               </a>               
-            </div>
-         </div>
-         <!-- End Inner -->
-      </section>
-      <!-- End Site Socials and Address -->
-      <!-- Footer -->
-      <footer id="footer" class="footer">
-         <!-- Your Company Name -->
-         <h4 class="colored">Fit and Lift</h4>
-         <!-- Copyright -->
-         <p class="copyright normal">© 2021 <span class="colored">Fit and Lift</span> All Rights Reserved.</p>
-      </footer>
-      <!-- End Footer -->
-      <!-- Copyright -->
+      {% include 'includes/footer.html' %}
       {% block postloadjs %}
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <script src="{% static 'js/base.js' %}"></script> 
