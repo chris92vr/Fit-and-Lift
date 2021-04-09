@@ -51,23 +51,16 @@ class Subscription(models.Model):
     Model for Subsciption
     """
 
-    subcription_membership = models.ForeignKey(
+    subscription_membership = models.ForeignKey(
         UserMembership,
         related_name='subscription',
         on_delete=models.CASCADE,
         null=True)
-    membership_duration = models.ForeignKey(
-        Membership,
-        related_name='duration',
-        on_delete=models.CASCADE,
-        default="")
     is_subscribed = models.BooleanField(null=True)
     expire_date_subscription = models.DateField(null=True)
     purchase_date = models.DateField(default=datetime.today)
     duration_days = models.IntegerField(default=30)
     extended_subscription_days = models.IntegerField(null=True)
-    price_for_day = models.FloatField(null=True)
-    total_renewal_price = models.FloatField(null=True)
 
     @property
     def expected_return(self, IntegerField):
