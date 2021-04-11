@@ -140,7 +140,7 @@ def edit_post(request, post_id):
 def delete_post(request, post_id):
     """ Delete a post from the blog """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can do that.')
+        messages.error(request, 'Sorry, only Fit & Lift staff can do that.')
         return redirect(reverse('home'))
 
     post = get_object_or_404(Post, pk=post_id)
