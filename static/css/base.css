@@ -644,6 +644,19 @@ section.home a {
 	margin: 100px auto;
 }
 
+.modal-footer .text-danger {
+	font-size: 1rem;
+	padding-bottom: 0.3rem;
+}
+
+@media (max-width: 440px) {
+	.modal-confirm {
+		max-width: 300px;
+		margin: 0 auto;
+		margin-top: 1rem;
+	}
+}
+
 
 /* Contact */
 
