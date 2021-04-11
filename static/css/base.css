@@ -703,6 +703,15 @@ form textarea:focus {
 	border-radius: 4px;
 }
 
+.contact-form .btn {
+	background-color: white !important;
+}
+
+.contact-form .btn:hover {
+	background-color: #8BC3A3 !important;
+	box-shadow: 0 0 5px rgba(0, 80, 80, .4);
+}
+
 
 /* Footer */
 
@@ -845,4 +854,3 @@ form textarea:focus {
 .footer p.copyright a:hover {
 	color: #8BC3A3;
 }
-
