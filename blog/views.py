@@ -84,7 +84,7 @@ def created_updated(self, request):
 def add_post(request):
     """ Add a post to the Blog """
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only the owners can do that.')
+        messages.error(request, 'Sorry, only Fit & Lift owners can do that.')
         return redirect(reverse('home'))
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
