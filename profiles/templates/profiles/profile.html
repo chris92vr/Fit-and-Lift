@@ -8,9 +8,9 @@
       </div>
       <div class="card-body">
          <!-- Home Tab panels -->
-         <p class="mb-4"><strong class="text-uppercase">Username:</strong> {{ user }}</p>
-         <p class="mb-4"><strong class="text-uppercase">First Name: </strong> {{ user.first_name }}</p>
-         <p class="mb-4"><strong class="text-uppercase">Last Name:</strong>  {{ user.last_name }}</p>
+         <p class="mb-4 text-capitalize"><strong class="text-uppercase">Username:</strong> {{ user }}</p>
+         <p class="mb-4 text-capitalize"><strong class="text-uppercase">First Name: </strong> {{ user.first_name }}</p>
+         <p class="mb-4 text-capitalize"><strong class="text-uppercase">Last Name:</strong>  {{ user.last_name }}</p>
          <p class="mb-4"><strong class="text-uppercase">Email: </strong> {{ user.email }}</p>
          <p class="mb-4"><strong class="text-uppercase">Last Login:</strong>  {{ user.last_login }}</p>
          <p class="mb-0"><strong class="text-uppercase">Date Joined: </strong> {{ user.date_joined }}</p>
@@ -19,7 +19,8 @@
          <div class="card-footer text-muted mt-4">
             <h3 class="font-weight-bold">Membership Details</h3>
             {% if subscription %}
-            <p class="mt-3"><strong class="text-uppercase">Gym Subscription:</strong> {{ subscription.membership_duration }}
+            <p class="mt-3 text-capitalize"><strong class="text-uppercase">Gym Subscription:</strong> <i class="fas fa-calendar-check text-success"></i> :
+               {{ membership.name }}
             </p>
             <p class="mt-3"><strong class="text-uppercase">Membership Start</strong> <i class="fas fa-calendar-check text-success"></i> :
                {{ subscription.purchase_date }}
@@ -28,7 +29,7 @@
                {{ subscription.expire_date_subscription }}
             </p>
             {% else %}
-            <p class="mt-3"><strong class="text-uppercase">Gym Subscription:</strong> <strong class="text-uppercase"><a href="{% url 'membership' %}"> GET MEMBERSHIP NOW! </a></strong>
+            <p class="mt-3"><strong class="text-uppercase">Gym Subscription:</strong> <strong class="text-uppercase"><a href="{% url 'membership' %}"> GET MEMBERSHIP NOW! {{ subscription.expire_date_subscription }} </a></strong>
             </p>
             <p class="mt-3"><strong class="text-uppercase">Membership Start</strong> <i class="fas fa-calendar-check text-success"></i> :
                <strong>NOT ACTIVE</strong>

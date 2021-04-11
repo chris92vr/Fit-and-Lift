@@ -1,32 +1,35 @@
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
-from membership.models import UserMembership, Subscription
+from membership.models import UserMembership, Subscription, Membership
 from django.contrib.auth.models import User
 import datetime as dt
 from django.contrib import messages
+import datetime as dt
 
 
 @login_required
 def profile(request):
     """ Display the user's profile. """
     profile = get_object_or_404(UserProfile, user=request.user)
-
     try:
         profile = UserProfile.objects.get(user=request.user)
         usermembership = get_object_or_404(
             UserMembership, member_profile=profile)
         subscription = get_object_or_404(
-            Subscription, subcription_membership=usermembership)
+            Subscription, subscription_membership=usermembership)
+        membership = get_object_or_404(
+            Membership, name=usermembership.user_membership)
     except BaseException:
         usermembership = None
         subscription = None
         profile = None
+        membership = None
     template = 'profiles/profile.html'
     context = {
         'profile': profile,
         'subscription': subscription,
-
+        'membership': membership,
     }
 
     return render(request, template, context)
