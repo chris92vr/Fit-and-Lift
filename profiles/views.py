@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from membership.models import UserMembership, Subscription
+from django.contrib.auth.models import User
 import datetime as dt
+from django.contrib import messages
 
 
 @login_required
@@ -28,3 +30,12 @@ def profile(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_accont(request):
+    """ Remove profile from db """
+    profile = get_object_or_404(User, username=request.user)
+    profile.delete()
+    messages.success(request, 'account deleted!')
+    return render(request, 'home/index.html')
