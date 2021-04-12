@@ -166,7 +166,7 @@ def update_subscription_checkout_success(request, subscription_id):
     """
     subscription = get_object_or_404(Subscription, pk=subscription_id)
     usermembership = get_object_or_404(UserMembership,
-                                       UserMembership=subscription.subscription_membership)
+                                       user_membership=subscription.subscription_membership)
     membership = get_object_or_404(Membership,
                                    name=usermembership.user_membership)
     extended_subscription_days = request.session.get('extended')
