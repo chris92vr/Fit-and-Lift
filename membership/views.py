@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from membership.models import Membership, Subscription
+from membership.models import Membership, Subscription, UserMembership
 from profiles.models import UserProfile
 from django.contrib.auth.decorators import login_required
 import datetime as dt
@@ -11,10 +11,13 @@ def membership(request):
     date = dt.date.today()
     try:
         profile = UserProfile.objects.get(user=request.user)
+        usermembership = get_object_or_404(UserMembership,
+                                           member_profile=profile)
         subscription = get_object_or_404(Subscription,
-                                         member_profile=profile
+                                         subscription_membership=usermembership
                                          )
     except:
+        usermembership = None
         subscription = None
         profile = None
     context = {

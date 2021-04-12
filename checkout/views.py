@@ -11,7 +11,7 @@ import datetime as dt
 from django.contrib.auth.decorators import login_required
 import datetime
 import datetime as dt
-from membership.models import Membership, Subscription
+from membership.models import Membership, UserMembership, Subscription
 from profiles.models import UserProfile
 import stripe
 
@@ -31,10 +31,13 @@ def checkout_membership(request, membership_id):
 
     try:
         profile = UserProfile.objects.get(user=request.user)
+        usermembership = get_object_or_404(UserMembership,
+                                           member_profile=profile)
         subscription = get_object_or_404(Subscription,
-                                         member_profile=profile
+                                         subscription_membership=usermembership
                                          )
     except BaseException:
+        usermembership = None
         subscription = None
         profile = None
 
@@ -67,11 +70,13 @@ def membership_success(request, membership_id):
     membership = get_object_or_404(Membership, pk=membership_id)
     profile = get_object_or_404(UserProfile, user=request.user)
     profile1 = get_object_or_404(User, username=request.user)
+    usermembership = UserMembership.objects.create(member_profile=profile,
+                                                   user_membership=membership)
     profile_name = profile.user
     duration_days = membership.duration_days
     date = dt.date.today()
     exp_date = date + timedelta(days=membership.duration_days)
-    Subscription.objects.create(member_profile=profile,
+    Subscription.objects.create(subscription_membership=usermembership,
                                 expire_date_subscription=exp_date,
                                 duration_days=duration_days)
     # Sends confirmation email to the customer
@@ -112,6 +117,11 @@ def update_subscription_checkout(request, subscription_id):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     subscription = get_object_or_404(Subscription, pk=subscription_id)
+    profile = UserProfile.objects.get(user=request.user)
+    usermembership = get_object_or_404(
+            UserMembership, member_profile=profile)
+    membership = get_object_or_404(
+            Membership, name=usermembership.user_membership)
     price = None
     extended_days = None
 
@@ -144,6 +154,7 @@ def update_subscription_checkout(request, subscription_id):
     template = 'checkout/update_subscription_checkout.html'
     context = {
         'subscription': subscription,
+        'membership': membership,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
         'stripe_total': stripe_total,
@@ -159,8 +170,6 @@ def update_subscription_checkout_success(request, subscription_id):
     Renders extend membership checkout page
     """
     subscription = get_object_or_404(Subscription, pk=subscription_id)
-    membership = get_object_or_404(Membership,
-                                   name=subscription.subscription_membership)
     extended_subscription_days = request.session.get('extended')
     subscription.extended_subscription_days = int(extended_subscription_days)
     date = subscription.expire_date_subscription
@@ -172,7 +181,7 @@ def update_subscription_checkout_success(request, subscription_id):
     profile = get_object_or_404(UserProfile, user=request.user)
     profile_name = profile.user
     profile1 = get_object_or_404(User, username=request.user)
-
+    membership = get_object_or_404(UserMembership, user_membership=subscription.subscription_membership)
     # Sends confirmation email to the customer
     cust_email = profile1.email
     subject = render_to_string('''checkout/confirmation_emails/
@@ -194,8 +203,8 @@ def update_subscription_checkout_success(request, subscription_id):
     template = 'checkout/update_subscription_checkout_success.html'
     context = {
         'exp_date': exp_date,
-        'subscription': subscription,
         'membership': membership,
+        'subscription': subscription,
         'profile_name': profile_name,
     }
     return render(request, template, context)

@@ -24,19 +24,32 @@ class Membership(models.Model):
         return self.name
 
 
+
+class UserMembership(models.Model):
+    """
+    Model for user profile membeship
+    """
+    member_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
+                                       null=True, blank=False,
+                                       related_name='member')
+    user_membership = models.ForeignKey(
+        Membership,
+        related_name='user_membership',
+        on_delete=models.SET_NULL,
+        null=True)
+
+
+
 class Subscription(models.Model):
     """
     Model for Subsciption
     """
 
     subscription_membership = models.ForeignKey(
-        Membership,
+        UserMembership,
         related_name='subscription',
         on_delete=models.CASCADE,
         null=True)
-    member_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
-                                       null=True, blank=False,
-                                       related_name='member')
     expire_date_subscription = models.DateField(null=True)
     purchase_date = models.DateField(default=datetime.today)
     duration_days = models.IntegerField(default=30)
