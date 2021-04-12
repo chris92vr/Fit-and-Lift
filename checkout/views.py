@@ -34,7 +34,7 @@ def checkout_membership(request, membership_id):
         usermembership = get_object_or_404(UserMembership,
                                            member_profile=profile)
         subscription = get_object_or_404(Subscription,
-                                         subcription_membership=usermembership
+                                         subscription_membership=usermembership
                                          )
     except BaseException:
         usermembership = None
