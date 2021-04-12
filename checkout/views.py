@@ -11,7 +11,7 @@ import datetime as dt
 from django.contrib.auth.decorators import login_required
 import datetime
 import datetime as dt
-from membership.models import Membership, UserMembership, Subscription
+from membership.models import Membership, Subscription
 from profiles.models import UserProfile
 import stripe
 
@@ -31,13 +31,10 @@ def checkout_membership(request, membership_id):
 
     try:
         profile = UserProfile.objects.get(user=request.user)
-        usermembership = get_object_or_404(UserMembership,
-                                           member_profile=profile)
         subscription = get_object_or_404(Subscription,
-                                         subscription_membership=usermembership
+                                         member_profile=profile
                                          )
     except BaseException:
-        usermembership = None
         subscription = None
         profile = None
 
@@ -70,14 +67,11 @@ def membership_success(request, membership_id):
     membership = get_object_or_404(Membership, pk=membership_id)
     profile = get_object_or_404(UserProfile, user=request.user)
     profile1 = get_object_or_404(User, username=request.user)
-    usermembership = UserMembership.objects.create(member_profile=profile,
-                                                   user_membership=membership)
     profile_name = profile.user
     duration_days = membership.duration_days
     date = dt.date.today()
     exp_date = date + timedelta(days=membership.duration_days)
-    Subscription.objects.create(subscription_membership=usermembership,
-                                is_subscribed=True,
+    Subscription.objects.create(member_profile=profile,
                                 expire_date_subscription=exp_date,
                                 duration_days=duration_days)
     # Sends confirmation email to the customer
@@ -165,10 +159,8 @@ def update_subscription_checkout_success(request, subscription_id):
     Renders extend membership checkout page
     """
     subscription = get_object_or_404(Subscription, pk=subscription_id)
-    usermembership = get_object_or_404(UserMembership,
-                                       user_membership=subscription.subscription_membership)
     membership = get_object_or_404(Membership,
-                                   name=usermembership.user_membership)
+                                   name=subscription.subscription_membership)
     extended_subscription_days = request.session.get('extended')
     subscription.extended_subscription_days = int(extended_subscription_days)
     date = subscription.expire_date_subscription

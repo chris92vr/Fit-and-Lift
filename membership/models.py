@@ -24,45 +24,25 @@ class Membership(models.Model):
         return self.name
 
 
-class UserMembership(models.Model):
-    """
-    Model for user profile membeship
-    """
-    member_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
-                                       null=True, blank=False,
-                                       related_name='member')
-    user_membership = models.ForeignKey(
-        Membership,
-        related_name='user_membership',
-        on_delete=models.SET_NULL,
-        null=True)
-
-    @classmethod
-    def create(cls, member_profile, user_membership):
-        usermembership = cls(
-            member_profile=member_profile,
-            user_membership=user_membership)
-        # do something with the book
-        return usermembership
-
-
 class Subscription(models.Model):
     """
     Model for Subsciption
     """
 
     subscription_membership = models.ForeignKey(
-        UserMembership,
+        Membership,
         related_name='subscription',
         on_delete=models.CASCADE,
         null=True)
-    is_subscribed = models.BooleanField(null=True)
+    member_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
+                                       null=True, blank=False,
+                                       related_name='member')
     expire_date_subscription = models.DateField(null=True)
     purchase_date = models.DateField(default=datetime.today)
     duration_days = models.IntegerField(default=30)
     extended_subscription_days = models.IntegerField(null=True)
 
     @property
-    def expected_return(self, IntegerField):
+    def registration_deadline(self, IntegerField):
 
         return self.purchase_date + datetime.timedelta(days=IntegerField)
