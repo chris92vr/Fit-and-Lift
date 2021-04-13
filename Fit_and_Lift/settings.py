@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = 'TRUE'
+DEBUG = 'DEVELOPMENT' in os.environ
+# DEBUG = 'TRUE'
 ALLOWED_HOSTS = ['fit-and-lift.herokuapp.com', 'localhost']
 
 
@@ -102,7 +102,7 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-X_FRAME_OPTIONS = 'ALLOW-FROM http://www.isresponsive.com/'
+
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
