@@ -16,7 +16,6 @@ def index(request):
 def contact(request):
     """ Renders a contact form """
     form = ContactForm(request.POST or None)
-    profile = get_object_or_404(UserProfile, user=request.user)
     profileUser = get_object_or_404(User, username=request.user)
     if form.is_valid():
         subject = form.cleaned_data.get("subject")
@@ -27,7 +26,7 @@ def contact(request):
         send_mail(
             subject, content, settings.DEFAULT_FROM_EMAIL, [
                 settings.DEFAULT_FROM_EMAIL])
-        context = {'profile': profile}
+        context = {'profile': profileUser}
         return render(request, 'home/contact_us_success.html', context)
     else:
         context = {'form': form}
