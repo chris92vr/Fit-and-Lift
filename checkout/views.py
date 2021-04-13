@@ -119,9 +119,9 @@ def update_subscription_checkout(request, subscription_id):
     subscription = get_object_or_404(Subscription, pk=subscription_id)
     profile = UserProfile.objects.get(user=request.user)
     usermembership = get_object_or_404(
-            UserMembership, member_profile=profile)
+        UserMembership, member_profile=profile)
     membership = get_object_or_404(
-            Membership, name=usermembership.user_membership)
+        Membership, name=usermembership.user_membership)
     price = None
     extended_days = None
 
@@ -181,15 +181,19 @@ def update_subscription_checkout_success(request, subscription_id):
     profile = get_object_or_404(UserProfile, user=request.user)
     profile_name = profile.user
     profile1 = get_object_or_404(User, username=request.user)
-    membership = get_object_or_404(UserMembership, user_membership=subscription.subscription_membership)
+    membership = get_object_or_404(UserMembership, member_profile=profile)
     # Sends confirmation email to the customer
     cust_email = profile1.email
-    subject = render_to_string('''checkout/confirmation_emails/
-        confirmation_email_subscription_subject.txt''')
-    body = render_to_string('''checkout/confirmation_emails/
-        confirmation_email_subscription_body.txt''',
-                            {'profile1': profile1, 'exp_date': exp_date,
-                             'contact_email': settings.DEFAULT_FROM_EMAIL})
+    subject = render_to_string(
+        'checkout/confirmation_emails/'
+        'confirmation_email_subscription_subject.txt')
+    body = render_to_string(
+        'checkout/confirmation_emails/'
+        'confirmation_email_subscription_body.txt',
+        {
+            'profile1': profile1,
+            'exp_date': exp_date,
+            'contact_email': settings.DEFAULT_FROM_EMAIL})
 
     send_mail(
         subject,
