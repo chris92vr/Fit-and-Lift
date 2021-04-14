@@ -9,8 +9,6 @@ from datetime import timedelta
 from django.contrib.auth.models import User
 import datetime as dt
 from django.contrib.auth.decorators import login_required
-import datetime
-import datetime as dt
 from membership.models import Membership, UserMembership, Subscription
 from profiles.models import UserProfile
 import stripe
