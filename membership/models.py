@@ -1,7 +1,10 @@
 from django.db import models
 from profiles.models import UserProfile
 from datetime import datetime
-
+from django.template.defaultfilters import slugify
+from Fit_and_Lift.util import unique_slug_generator
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
 
 class Membership(models.Model):
     """
@@ -42,8 +45,7 @@ class Subscription(models.Model):
     """
     Model for Subsciption
     """
-
-    subscription_membership = models.ForeignKey(
+    user_membership = models.ForeignKey(
         UserMembership,
         related_name='subscription',
         on_delete=models.CASCADE,
@@ -52,8 +54,3 @@ class Subscription(models.Model):
     purchase_date = models.DateField(default=datetime.today)
     duration_days = models.IntegerField(default=30)
     extended_subscription_days = models.IntegerField(null=True)
-
-    @property
-    def registration_deadline(self, IntegerField):
-
-        return self.purchase_date + datetime.timedelta(days=IntegerField)

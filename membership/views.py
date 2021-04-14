@@ -14,7 +14,7 @@ def membership(request):
         usermembership = get_object_or_404(UserMembership,
                                            member_profile=profile)
         subscription = get_object_or_404(Subscription,
-                                         subscription_membership=usermembership
+                                         user_membership=usermembership
                                          )
     except:
         usermembership = None

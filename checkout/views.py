@@ -32,7 +32,7 @@ def checkout_membership(request, membership_id):
         usermembership = get_object_or_404(UserMembership,
                                            member_profile=profile)
         subscription = get_object_or_404(Subscription,
-                                         subscription_membership=usermembership
+                                         user_membership=usermembership
                                          )
     except BaseException:
         usermembership = None
@@ -78,7 +78,7 @@ def membership_success(request, membership_id):
         duration_days = membership.duration_days
         date = dt.date.today()
         exp_date = date + timedelta(days=membership.duration_days)
-        Subscription.objects.create(subscription_membership=usermembership,
+        Subscription.objects.create(user_membership=usermembership,
                                     expire_date_subscription=exp_date,
                                     duration_days=duration_days)
         # Sends confirmation email to the customer
