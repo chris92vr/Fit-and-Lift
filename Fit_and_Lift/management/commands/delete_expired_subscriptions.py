@@ -12,3 +12,4 @@ class Command(BaseCommand):
         for subscription in subscriptions:
             if subscription.expire_date_subscription < dt.date.today():
                 subscription.delete()
+        return
