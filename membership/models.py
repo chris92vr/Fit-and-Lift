@@ -24,20 +24,18 @@ class Membership(models.Model):
         return self.name
 
 
-
 class UserMembership(models.Model):
     """
     Model for user profile membeship
     """
-    member_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
+    member_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE,
                                        null=True, blank=False,
                                        related_name='member')
     user_membership = models.ForeignKey(
         Membership,
         related_name='user_membership',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True)
-
 
 
 class Subscription(models.Model):
