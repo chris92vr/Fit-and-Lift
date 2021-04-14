@@ -7,10 +7,10 @@
 {% block content %}
 <div id="subscription-checkout" class="container">
    <!-- Membership Title -->
-   <div class="col-12 text-center text-uppercase jumbotron">
+   <div class="col-12 text-center jumbotron">
       <h1 class="mb-5">Success!</h1>
       <div>
-         <p>{{ profile_name }}, thank you for extending your {{ membership }} membership, you have full access to
+         <p><span class="text-capitalize">{{ profile_name }}</span>, thank you for extending your {{ membership }} membership, you have full access to
             all our gym facilites for {{ subscription.duration_days }} days and is available till {{ exp_date|date:"M. d, Y" }}. The confirmation email has been sent to your address
          </p>
       </div>

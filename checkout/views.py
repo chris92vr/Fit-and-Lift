@@ -70,33 +70,38 @@ def membership_success(request, membership_id):
     membership = get_object_or_404(Membership, pk=membership_id)
     profile = get_object_or_404(UserProfile, user=request.user)
     profile1 = get_object_or_404(User, username=request.user)
-    usermembership = UserMembership.objects.create(member_profile=profile,
-                                                   user_membership=membership)
-    profile_name = profile.user
-    duration_days = membership.duration_days
-    date = dt.date.today()
-    exp_date = date + timedelta(days=membership.duration_days)
-    Subscription.objects.create(subscription_membership=usermembership,
-                                expire_date_subscription=exp_date,
-                                duration_days=duration_days)
-    # Sends confirmation email to the customer
-    cust_email = profile1.email
-    subject = render_to_string(
-        'checkout/confirmation_emails/confirmation_email_subject.txt')
-    body = render_to_string(
-        'checkout/confirmation_emails/confirmation_email_body.txt',
-        {'profile1': profile1, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+    try:
+        usermembership = get_object_or_404(
+            UserMembership, member_profile=profile)
+    except BaseException:
+        usermembership = UserMembership.objects.create(
+            member_profile=profile, user_membership=membership)
+        profile_name = profile.user
+        duration_days = membership.duration_days
+        date = dt.date.today()
+        exp_date = date + timedelta(days=membership.duration_days)
+        Subscription.objects.create(subscription_membership=usermembership,
+                                    expire_date_subscription=exp_date,
+                                    duration_days=duration_days)
+        # Sends confirmation email to the customer
+        cust_email = profile1.email
+        subject = render_to_string(
+            'checkout/confirmation_emails/confirmation_email_subject.txt')
+        body = render_to_string(
+            'checkout/confirmation_emails/confirmation_email_body.txt',
+            {'profile1': profile1,
+             'contact_email': settings.DEFAULT_FROM_EMAIL})
 
-    send_mail(
-        subject,
-        body,
-        settings.DEFAULT_FROM_EMAIL,
-        [cust_email]
-    )
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [cust_email]
+        )
 
-    messages.success(request, f'Subscription successfully processed! \
-        Your membership active is {membership.membership_type}, \
-        valid till { exp_date }. ')
+        messages.success(request, f'Subscription successfully processed! \
+            Your membership active is {membership.membership_type}, \
+            valid till { exp_date }. ')
     template = 'checkout/checkout_membership_success.html'
     context = {
         'exp_date': exp_date,
@@ -181,7 +186,9 @@ def update_subscription_checkout_success(request, subscription_id):
     profile = get_object_or_404(UserProfile, user=request.user)
     profile_name = profile.user
     profile1 = get_object_or_404(User, username=request.user)
-    membership = get_object_or_404(UserMembership, member_profile=profile)
+    usermembership = get_object_or_404(UserMembership, member_profile=profile)
+    membership = get_object_or_404(
+        Membership, name=usermembership.user_membership)
     # Sends confirmation email to the customer
     cust_email = profile1.email
     subject = render_to_string(
@@ -236,6 +243,5 @@ def stripe_webhook(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         print("Payment was successful.")
-        # TODO: run some custom code here
 
     return HttpResponse(status=200)
