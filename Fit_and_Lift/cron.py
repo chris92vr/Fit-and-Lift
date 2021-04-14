@@ -1,10 +1,8 @@
 from membership.models import Subscription
-from datetime import datetime, timedelta
-
+import datetime as dt
 
 def cleanup_expired_subscriptions():
     # Deleted expired subscriptions
+    date = dt.date.today()
     Subscription.objects.filter(
-            expire_date_subscription__lte=datetime.now() -
-            timedelta(
-                days=1)).delete()
+            expire_date_subscription__lt=date).delete()

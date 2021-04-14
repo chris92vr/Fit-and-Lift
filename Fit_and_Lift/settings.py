@@ -92,7 +92,7 @@ TEMPLATES = [
 ]
 
 CRONJOBS = [
-    ('0 0 * * *', 'Fit_and_Lift.cron.cleanup_expired_subscriptions')
+    ('* * * * *', 'Fit_and_Lift.cron.cleanup_expired_subscriptions')
 ]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
