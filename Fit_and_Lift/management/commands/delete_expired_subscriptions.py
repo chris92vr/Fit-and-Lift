@@ -1,14 +1,10 @@
-from django.core.management.base import BaseCommand
-from Fit_and_Lift.deleted_expired_subscriptions import cleanup_expired_subscriptions
+from django.core.management.base import NoArgsCommand
+from membership.models import Subscription
+import datetime as dt
 
-class Command(BaseCommand):
-    def handle(self, *args, **options):
+class Command(NoArgsCommand):
 
-        # Delete expired subscriptions
-        cleanup_expired_subscriptions()
+    help = 'Expires event objects which are out-of-date'
 
-
-
-
-
-
+    def handle_noargs(self):
+        Subscription.objects.filter(date__lt=dt.date.today()).delete()
