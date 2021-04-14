@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     # Other
     'crispy_forms',
     'storages',
-    'django_crontab',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,10 +89,6 @@ TEMPLATES = [
             ]
         },
     },
-]
-
-CRONJOBS = [
-    ('* * * * *', 'Fit_and_Lift.cron.cleanup_expired_subscriptions')
 ]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
