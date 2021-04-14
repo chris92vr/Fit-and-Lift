@@ -8,20 +8,12 @@
 <div id="subscription-checkout" class="container">
    <!-- Membership Title -->
    <div class="col-12 text-center text-uppercasejumbotron">
-       {% if subscription.expire_date_subscription > date %}
-      <h1 class="mb-5">Failure!</h1>
-      <div>
-         <p>{{ profile_name }}, you are already subscribed!
-         </p>
-      </div>
-      {% else %}
       <h1 class="mb-5">Success!</h1>
       <div>
          <p>{{ profile_name }}, thank you for subscribing to our {{ membership }} membership, you have full access to
             all our gym facilites for {{ membership.duration_days }} days and is available till {{ exp_date|date:"M. d, Y" }}. The confirmation email has been sent to your address
          </p>
       </div>
-      {% endif %}
    </div>
 </div>
 {% endblock %}
