@@ -2,7 +2,6 @@ from django.db import models
 from profiles.models import UserProfile
 from datetime import datetime
 from django.template.defaultfilters import slugify
-from Fit_and_Lift.util import unique_slug_generator
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
 

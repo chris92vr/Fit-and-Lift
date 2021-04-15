@@ -12,12 +12,22 @@ import datetime as dt
 def profile(request):
     """ Display the user's profile. """
     profile = get_object_or_404(UserProfile, user=request.user)
+    # Delete expired subscriptions
+    date = dt.date.today()
+    subscriptions_expired=Subscription.objects.filter(
+            expire_date_subscription__lt=date)
+    for subscription in subscriptions_expired:
+        usermembership = get_object_or_404(
+        UserMembership, member_profile=profile)
+        usermembership.delete()
+    subscriptions_expired.delete()
+    membership = Membership.objects.all()
     try:
         profile = UserProfile.objects.get(user=request.user)
         usermembership = get_object_or_404(
             UserMembership, member_profile=profile)
         subscription = get_object_or_404(
-            Subscription, subscription_membership=usermembership)
+            Subscription, user_membership=usermembership)
         membership = get_object_or_404(
             Membership, name=usermembership.user_membership)
     except BaseException:

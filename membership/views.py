@@ -7,10 +7,19 @@ import datetime as dt
 
 def membership(request):
     """ renders all membership"""
-    membership = Membership.objects.all()
+    # Delete expired subscriptions
     date = dt.date.today()
+    profile = UserProfile.objects.get(user=request.user)
+    subscriptions_expired=Subscription.objects.filter(
+            expire_date_subscription__lt=date)
+    for subscription in subscriptions_expired:
+        usermembership = get_object_or_404(
+        UserMembership, member_profile=profile)
+        usermembership.delete()
+    subscriptions_expired.delete()
+    membership = Membership.objects.all()
+
     try:
-        profile = UserProfile.objects.get(user=request.user)
         usermembership = get_object_or_404(UserMembership,
                                            member_profile=profile)
         subscription = get_object_or_404(Subscription,
@@ -19,7 +28,6 @@ def membership(request):
     except:
         usermembership = None
         subscription = None
-        profile = None
     context = {
         'membership': membership,
         'subscription': subscription,
