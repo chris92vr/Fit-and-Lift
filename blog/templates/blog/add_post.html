@@ -11,6 +11,7 @@
    </div>
    <div class="row">
       <div class="col-12 ">
+          <!-- Add Post form -->
          <form method="POST" action="{% url 'add_post' %}" class="form mb-2" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}

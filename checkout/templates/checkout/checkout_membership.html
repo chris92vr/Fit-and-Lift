@@ -7,6 +7,7 @@
 {% block content %}
 <section  class="subscription container-fluid">
    {% if subscription.expire_date_subscription > date %}
+    <!-- if user already subscribed, show "extend subscriptrion" button -->
    <div class="row">
       <div class="col-sm-12">
          <h1 class="text-center">Subscription</h1>
