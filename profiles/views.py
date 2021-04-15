@@ -14,13 +14,12 @@ def profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
     # Delete expired subscriptions
     date = dt.date.today()
-    subscriptions_expired=Subscription.objects.filter(
-            expire_date_subscription__lt=date)
+    subscriptions_expired = Subscription.objects.filter(
+        expire_date_subscription__lt=date)
     for subscription in subscriptions_expired:
         usermembership = get_object_or_404(
-        UserMembership, member_profile=profile)
+            UserMembership, subscription_number=subscription.user_membership)
         usermembership.delete()
-    subscriptions_expired.delete()
     membership = Membership.objects.all()
     try:
         profile = UserProfile.objects.get(user=request.user)

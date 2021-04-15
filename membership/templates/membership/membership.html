@@ -13,6 +13,7 @@
       <br>
       <div class="row container m-auto">
          <div class="col-sm-12">
+             <!-- if user already subscribed, show "extend subscriptrion" button -->
             {% if subscription.expire_date_subscription > date %}
             <div class="jumbotron text-center">
                <p> You cannot proceed with payment as you are already subscribed until {{ subscription.expire_date_subscription }} </p>

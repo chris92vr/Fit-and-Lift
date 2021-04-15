@@ -9,14 +9,12 @@ def membership(request):
     """ renders all membership"""
     # Delete expired subscriptions
     date = dt.date.today()
-    profile = UserProfile.objects.get(user=request.user)
-    subscriptions_expired=Subscription.objects.filter(
-            expire_date_subscription__lt=date)
+    subscriptions_expired = Subscription.objects.filter(
+        expire_date_subscription__lt=date)
     for subscription in subscriptions_expired:
         usermembership = get_object_or_404(
-        UserMembership, member_profile=profile)
+            UserMembership, subscription_number=subscription.user_membership)
         usermembership.delete()
-    subscriptions_expired.delete()
     membership = Membership.objects.all()
 
     try:
@@ -25,7 +23,7 @@ def membership(request):
         subscription = get_object_or_404(Subscription,
                                          user_membership=usermembership
                                          )
-    except:
+    except BaseException:
         usermembership = None
         subscription = None
     context = {
