@@ -192,15 +192,18 @@ ul {
 	padding: 2rem;
 }
 
-@media (max-width: 760px) {
-	.main-content {
-		width: 100%;
+ @media  all and (max-width:760px),
+            screen and (-webkit-min-device-pixel-ratio: 3.0) and (max-width: 1080px),
+            screen and (-webkit-min-device-pixel-ratio: 2.0) and (max-width: 720px) {
+    .main-content {
+        width: 100%;
 		box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
 		margin: 11em auto;
 		display: flex;
 		padding: 2rem;
-	}
+    }
 }
+   
 
 .card {
 	padding: 1rem;
