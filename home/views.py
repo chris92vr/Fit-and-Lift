@@ -5,13 +5,10 @@ from django.core.mail import send_mail
 from profiles.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from membership.models import UserMembership, Subscription
-import datetime as dt
-from profiles.models import UserProfile
 
 
 def index(request):
-    """ A view to return the index page """    
+    """ A view to return the index page """
     return render(request, 'home/index.html')
 
 
