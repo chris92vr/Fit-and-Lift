@@ -3,17 +3,17 @@
 {% load i18n %}
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 {% block inner_content %}
-<div class="row ">
-   <div class="col-6">
+
+   <div class="col-12">
       <h2 class="logo-font ">{% trans "Sign Up" %}</h2>
    </div>
    <div class="col-6">
       <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
    </div>
-</div>
+
 <hr>
 <hr>
-<form class="signup mt-3 mb-5" id="signup_form" method="post" action="{% url 'account_signup' %}">
+<form class="signup mt-3 mb-5 col-12 col-md-6" id="signup_form" method="post" action="{% url 'account_signup' %}">
    {% csrf_token %}
    {{ form|crispy }}
    {% if redirect_field_value %}

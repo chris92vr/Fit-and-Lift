@@ -185,17 +185,11 @@ ul {
 }
 
 .main-content {
-	width: 100%;
+	
 	box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
 	margin: 11em auto;
 	display: flex;
 	padding: 2rem;
-}
-
- @media (min-device-width:760px) {
-    .platform-android .main-content {
-        width: 50%;
-    } 
 }
 
 .card {
