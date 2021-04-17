@@ -247,7 +247,7 @@ Perform removal of expired subscriptions via cronjob once a day.
 * <a href="https://getbootstrap.com/">Bootstrap</a> framework was used for developing a responsive, mobile-first website
 * <a href="https://www.djangoproject.com/">Django</a> as python web framework used for rapid development, maintainable, clean design
 * <a href="https://jquery.com/">jQuery</a> JavaScript library to simplify HTML DOM manipulation
-* <a href="https://fonts.google.com/specimen/Nunito">Google Fonts</a> Used Noto Sans fonts
+* <a href="https://fonts.google.com/specimen/Nunito">Google Fonts</a> Used RocknRoll One fonts
 * <a href="https://fontawesome.com/">FontAwesome</a> as icon provider
 * <a href="https://stripe.com/">Stripe</a> made it possible to receive payments for the eggs
 * <a href="https://pypi.org/project/psycopg2/">Psycopg2</a> as database adapter for the Python
