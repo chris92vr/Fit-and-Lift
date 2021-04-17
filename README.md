@@ -164,9 +164,9 @@ The 'User profile' model saves the users information and displays it in Profile 
 
 The 'User membership' model uses User profile and Membership as foreign key. 
 
-The 'Subscription' model uses User membership as foreign key. 
+The 'Subscription' model uses User membership as foreign key. Contains user information about the purchased subscription.
 
-'Post' uses User profile as One to One relationship. 
+'Post' uses User profile as as foreign key. Represents posts published on the blog. 
 
 'Comment' model uses Post as foreign key. 
 
