@@ -16,14 +16,16 @@ def membership(request):
             UserMembership, subscription_number=subscription.user_membership)
         usermembership.delete()
     membership = Membership.objects.all()
-
+    # check if the logged in user is already subscribed
     try:
+        profile = UserProfile.objects.get(user=request.user)
         usermembership = get_object_or_404(UserMembership,
                                            member_profile=profile)
         subscription = get_object_or_404(Subscription,
                                          user_membership=usermembership
                                          )
     except BaseException:
+        profile = None
         usermembership = None
         subscription = None
     context = {
