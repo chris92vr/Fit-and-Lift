@@ -122,8 +122,8 @@ nav .nav li a:focus {
 
 .message-container {
 	position: fixed;
-	top: 115px;
-	right: 85px;
+	top: 128px;
+	right: 88px;
 	z-index: 99999999999;
 }
 
@@ -185,7 +185,6 @@ ul {
 }
 
 .main-content {
-	
 	box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
 	margin: 11em auto;
 	display: flex;
@@ -499,6 +498,23 @@ section.home a {
 	margin-top: 2rem;
 	max-width: 25rem;
 	margin: 0 auto;
+}
+
+span.btn-file {
+	max-width: -moz-fit-content;
+}
+
+@media (max-width: 558px) {
+	span.btn-file {
+		font-size: 0.7rem;
+		margin-bottom: 0.5rem;
+	}
+}
+
+@media (max-width: 400px) {
+	span.btn-file {
+		font-size: 0.5rem;
+	}
 }
 
 @media (min-width: 1200px) {
@@ -857,3 +873,4 @@ form textarea:focus {
 .footer p.copyright a:hover {
 	color: #8BC3A3;
 }
+
