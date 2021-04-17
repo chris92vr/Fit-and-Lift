@@ -151,7 +151,7 @@ The following [wireframe](https://github.com/chris92vr/book-mania/tree/master/pr
 
 ## Database
 
-![alt text](https://github.com/chris92vr/Milestone4-Fit-and-Lift/blob/master/project-documentation/images/DB Diagram.jpg "DB Diagram")
+![alt text](https://github.com/chris92vr/Milestone4-Fit-and-Lift/blob/master/project-documentation/images/DB%20Diagram.jpg "DB Diagram")
 
 
 During development, I worked with the standard sqlite3, database that comes installed with Django. In the production version, "Fit and Lift" is backed by a PostgreSQL database, hosted and provided by Heroku.
