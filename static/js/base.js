@@ -3,8 +3,10 @@ $("a.about-icon").hover(function() {
 }, function() {
     $(this).children("i").removeClass("fa-spin");
 });
+$('.toast').toast({delay:5500});
 $('.toast').toast('show');
-$('.toast').toast({delay:1000, animation:false});
+
+
 //Get the button:
 mybutton = document.getElementById("myBtn");
 
