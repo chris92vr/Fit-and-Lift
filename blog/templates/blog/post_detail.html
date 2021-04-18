@@ -17,10 +17,8 @@
                <div class="card-body"></div>
                <h5 class="card-title">User action</h5>
                <a href="{% url 'add_post' %}" class="btn mt-5 mb-4">Add a New Post</a> 
-               {% if post.created_by == profile.user  %}
                <a href="{% url 'edit_post' post.id %}" class="btn">Edit</a>  
                <a href="#myModal" class="trigger-btn text-danger mt-4" data-toggle="modal">Delete!</a>
-               {% endif %}
             </div>
             {% endif %}    
             <!-- Search Widget -->
