@@ -72,6 +72,14 @@ def post_detail(request, post_id):
     return render(request, 'blog/post_detail.html', context)
 
 
+def created_updated(self, request):
+        obj = Post.objects.latest('pk')
+        if obj.created_by is None:
+            obj.created_by = request.user
+        obj.updated_by = request.user
+        obj.save()
+
+
 @login_required
 def add_post(request):
     """ Add a post to the Blog """
