@@ -423,7 +423,7 @@ section.home a {
 	margin: 0 auto;
 }
 
-#loading-overlay {
+#loading-container {
 	display: none;
 	position: fixed;
 	top: 0;
