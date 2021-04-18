@@ -242,7 +242,7 @@ Perform removal of expired subscriptions via cronjob once a day.
 - **Python** 
 
 
-#### Libraries, frameworks, tools used
+### Libraries, frameworks, tools used
 
 * <a href="https://getbootstrap.com/">Bootstrap</a> framework was used for developing a responsive, mobile-first website
 * <a href="https://www.djangoproject.com/">Django</a> as python web framework used for rapid development, maintainable, clean design
@@ -268,7 +268,7 @@ Perform removal of expired subscriptions via cronjob once a day.
 
 
 
-#### Databases
+### Databases
 
 * <a href="https://www.postgresql.org/">PostgreSQL</a> database service provided directly by Heroku
 * <a href="https://www.sqlite.org/index.html">SQlite3</a> provided by django
@@ -327,7 +327,7 @@ In the folder [project-documentation/testing](https://github.com/chris92vr/Miles
 
 ## Deployment
 
-#### Running Code Locally
+### Running Code Locally
 
 
 1. Follow this link to my [Repository on Github](https://github.com/chris92vr/Milestone4-Fit-and-Lift) and open it.
@@ -376,7 +376,7 @@ os.environ.setdefault("AWS_SECRET_ACCESS_KEY", "secret key here")
 
 17.  Add `/admin` to the end of the url address and login with your superuser account and create new products.
 
-#### Deployment to Heroku
+### Deployment to Heroku
 
 The following steps were taken in order to deploy this site to Heroku:
 
@@ -479,13 +479,13 @@ DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 - I consulted https://djangocentral.com/ for the creation of the blog.
 
 
-#### Acknowledgements
+### Acknowledgements
 
 Thanks to my mentor Brian Macharia for support and advice throughout the project.
 
 [Back to Top](#table-of-contents)
 
-#### Disclaimer
+### Disclaimer
 
 This project was created for educational use only.
 
