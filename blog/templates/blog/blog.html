@@ -31,9 +31,13 @@
          </div>
       </div>
       <div class="col-sm-8 col blog-main">
-         {% if search_term or current_categories or current_sorting != 'None_None' %}
+         {% if search_term %}
          <p class="text-muted ">
             {{ post|length }} Post{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+         </p>
+         {% else %}
+         <p class="text-muted ">
+            {{ count_post }} Post
          </p>
          {% endif %}
          {% if search_term or current_categories or current_sorting == 'None_None' %}

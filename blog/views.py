@@ -12,6 +12,7 @@ def blog(request):
     """ Renders all post"""
     query = None
     all_post = Post.objects.all()
+    count_post = Post.objects.all().count()
     page_number = request.GET.get('page')
     if request.GET:
         if 'q' in request.GET:
@@ -38,6 +39,7 @@ def blog(request):
 
     context = {
         'post': post,
+        'count_post': count_post,
         'search_term': query,
     }
     return render(request, 'blog/blog.html', context)
