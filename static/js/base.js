@@ -3,7 +3,7 @@ $("a.about-icon").hover(function() {
 }, function() {
     $(this).children("i").removeClass("fa-spin");
 });
-$('.toast').toast({delay:5500});
+$('.toast').toast({delay:4000});
 $('.toast').toast('show');
 
 
