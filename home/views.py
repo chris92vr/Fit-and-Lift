@@ -23,6 +23,7 @@ def contact(request):
         content = form.cleaned_data.get("content")
         content = " with the email, " + contact_email + \
             ", sent the following message:\n\n" + content
+        # Send email
         send_mail(
             subject, content, settings.DEFAULT_FROM_EMAIL, [
                 settings.DEFAULT_FROM_EMAIL])

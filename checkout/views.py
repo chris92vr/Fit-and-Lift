@@ -24,6 +24,14 @@ def checkout_membership(request, membership_id):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     date = dt.date.today()
     membership = get_object_or_404(Membership, pk=membership_id)
+    # Delete expired subscriptions
+    subscriptions_expired = Subscription.objects.filter(
+        expire_date_subscription__lt=date)
+    for subscription in subscriptions_expired:
+        usermembership = get_object_or_404(
+            UserMembership, subscription_number=subscription.user_membership)
+        usermembership.delete()
+    membership = Membership.objects.all()
     # check if the logged in user is already subscribed
     try:
         profile = UserProfile.objects.get(user=request.user)
@@ -66,6 +74,7 @@ def membership_success(request, membership_id):
     membership = get_object_or_404(Membership, pk=membership_id)
     profile = get_object_or_404(UserProfile, user=request.user)
     profileUser = get_object_or_404(User, username=request.user)
+    # check if the user is already subscribed
     try:
         usermembership = get_object_or_404(
             UserMembership, member_profile=profile)
@@ -76,6 +85,7 @@ def membership_success(request, membership_id):
         duration_days = membership.duration_days
         date = dt.date.today()
         exp_date = date + timedelta(days=membership.duration_days)
+        # Create subscription
         Subscription.objects.create(user_membership=usermembership,
                                     expire_date_subscription=exp_date,
                                     duration_days=duration_days)
@@ -178,6 +188,7 @@ def update_subscription_checkout_success(request, subscription_id):
     subscription.expire_date_subscription = exp_date
     subscription.duration_days = subscription.duration_days
     + subscription.extended_subscription_days
+    # Update subscription
     subscription.save()
     profile = get_object_or_404(UserProfile, user=request.user)
     profile_name = profile.user
