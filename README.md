@@ -57,7 +57,7 @@ Contains a background with a "Join Us" button in the top. A gallery contains pic
 
 
 * Membership  
-Contains all the membership plans available. If the user is already registered he can choose to extend his subscription.
+Contains all the membership plans available. Users that are already registered, can choose to extend their subscription.
 
 * Blog  
 You can view the Blog and search keywords from all post.
