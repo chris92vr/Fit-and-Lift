@@ -25,13 +25,17 @@ def checkout_membership(request, membership_id):
     date = dt.date.today()
     membership = get_object_or_404(Membership, pk=membership_id)
     # Delete expired subscriptions
-    subscriptions_expired = Subscription.objects.filter(
-        expire_date_subscription__lt=date)
-    for subscription in subscriptions_expired:
-        usermembership = get_object_or_404(
-            UserMembership, subscription_number=subscription.user_membership)
-        usermembership.delete()
-    membership = Membership.objects.all()
+    try:
+        subscriptions_expired = Subscription.objects.get(
+            expire_date_subscription__lt=date)
+        for subscription in subscriptions_expired:
+            usermembership = get_object_or_404(
+                UserMembership,
+                subscription_number=subscription.user_membership)
+            usermembership.delete()
+    except BaseException:
+        subscriptions_expired = None
+
     # check if the logged in user is already subscribed
     try:
         profile = UserProfile.objects.get(user=request.user)
