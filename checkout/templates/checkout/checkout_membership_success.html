@@ -1,19 +1,19 @@
-{% extends "base.html" %}
-{% block extra_title %}Checkout Success{% endblock %}
-{% load static %}
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
-{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block extra_title %}Checkout Success{% endblock %}
+{% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
+{% endblock %} {% block content %}
 <div id="subscription-checkout" class="container">
-   <div class="col-12 text-center jumbotron">
-      <h1 class="mb-5">Success!</h1>
-      <div>
-         <p><span class="text-capitalize">{{ profile_name }}</span>, thank you for subscribing to our {{ membership }} membership, you have full access to
-            all our gym facilites for {{ membership.duration_days }} days and is available till {{ exp_date|date:"M. d, Y" }}. The confirmation email has been sent to your address
-         </p>
-      </div>
-   </div>
+  <div class="col-12 text-center jumbotron">
+    <h1 class="mb-5">Success!</h1>
+    <div>
+      <p>
+        <span class="text-capitalize">{{ profile_name }}</span>, thank you for
+        subscribing to our {{ membership }} membership, you have full access to
+        all our gym facilites for {{ membership.duration_days }} days and is
+        available till {{ exp_date|date:"M. d, Y" }}. The confirmation email has
+        been sent to your address!
+      </p>
+    </div>
+  </div>
 </div>
 {% endblock %}
-
